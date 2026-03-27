@@ -223,47 +223,119 @@ def crm():
 # ================================================================
 
 _drive_lock = threading.Lock()
+_portfoy_status: dict = {"error": None, "running": False, "last_attempt": 0}
 
 
 def _run_drive_to_html():
-    """drive_to_html.main() fonksiyonunu subprocess yerine doğrudan çağırır."""
+    """drive_to_html.main() fonksiyonunu doğrudan çağırır. Hataları açıkça loglar."""
     try:
         import drive_to_html as _d2h
+
+        # Kritik env kontrolleri — boşsa anlamlı hata ver
+        sa = os.environ.get("GOOGLE_SERVICE_ACCOUNT", "").strip()
+        folder = os.environ.get("GDRIVE_FOLDER_ID", "").strip()
+        if not sa:
+            raise EnvironmentError(
+                "GOOGLE_SERVICE_ACCOUNT env var tanımlı değil! "
+                "Render Dashboard → Environment → bu değişkeni JSON string olarak ekle."
+            )
+        if not folder:
+            raise EnvironmentError(
+                "GDRIVE_FOLDER_ID env var tanımlı değil! "
+                "Google Drive klasör URL'sinden ID'yi al ve Render'a ekle."
+            )
+
         _d2h.main()
         return True, None
     except Exception as e:
-        return False, str(e)
+        import traceback
+        msg = str(e)
+        print(f"❌ drive_to_html hatası: {msg}")
+        traceback.print_exc()
+        return False, msg
+
+
+def _trigger_portfoy_bg():
+    """
+    sunum.html yoksa veya force=True ise arka planda üretim başlatır.
+    _drive_lock alınamazsa (zaten çalışıyor) sessizce çıkar.
+    """
+    if not _drive_lock.acquire(blocking=False):
+        return  # zaten çalışıyor
+
+    _portfoy_status["running"] = True
+    _portfoy_status["last_attempt"] = time.time()
+
+    def _bg():
+        try:
+            ok, err = _run_drive_to_html()
+            if ok:
+                print("✅ Portföy HTML üretildi")
+                _portfoy_status["error"] = None
+            else:
+                print(f"⚠️  Portföy HTML üretimi başarısız: {err}")
+                _portfoy_status["error"] = err
+        finally:
+            _portfoy_status["running"] = False
+            _drive_lock.release()
+
+    threading.Thread(target=_bg, daemon=True).start()
 
 
 @app.route("/portfoy")
 def portfoy():
     """Proje portföy sayfası — drive_to_html tarafından üretilen sunum.html"""
     sunum = Path("sunum.html")
-    if not sunum.exists():
-        # İlk ziyarette yok — arka planda üret, geçici loading göster
-        return """<!DOCTYPE html>
+
+    if sunum.exists():
+        return send_file("sunum.html")
+
+    # sunum.html yok — üretimi tetikle (eğer çalışmıyorsa)
+    _trigger_portfoy_bg()
+
+    err_msg = _portfoy_status.get("error")
+    running = _portfoy_status.get("running", False)
+
+    if err_msg:
+        # Hata varsa kullanıcıya göster
+        err_html = f"""
+  <div style="background:#1a0a0a;border:1px solid #7f1d1d;border-radius:8px;padding:20px 28px;max-width:600px;text-align:left;">
+    <p style="color:#f87171;font-size:.8rem;margin-bottom:8px;letter-spacing:.1em">HATA DETAYI</p>
+    <pre style="color:#fca5a5;font-size:.72rem;white-space:pre-wrap;word-break:break-all">{err_msg}</pre>
+  </div>
+  <p style="font-size:.65rem;color:#555;margin-top:8px">Render Dashboard → Environment Variables kontrol edin</p>"""
+        refresh_tag = '<meta http-equiv="refresh" content="30;url=/portfoy"/>'
+    else:
+        err_html = ""
+        refresh_tag = '<meta http-equiv="refresh" content="15;url=/portfoy"/>'
+
+    status_text = "Üretim çalışıyor…" if running else "Başlatılıyor…"
+
+    return f"""<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8"/>
-<meta http-equiv="refresh" content="15;url=/portfoy"/>
+{refresh_tag}
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Portföy Hazırlanıyor — Nexa CRM</title>
 <style>
-  body{background:#080810;color:#ede9df;font-family:"DM Mono",monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;flex-direction:column;gap:20px}
-  .loader{width:40px;height:40px;border:2px solid rgba(201,168,76,.2);border-top-color:#c9a84c;border-radius:50%;animation:spin 1s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  p{color:#9b9aac;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase}
-  a{color:#c9a84c;font-size:.7rem;letter-spacing:.1em}
+  body{{background:#080810;color:#ede9df;font-family:"DM Mono",monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;flex-direction:column;gap:20px;padding:20px}}
+  .loader{{width:40px;height:40px;border:2px solid rgba(201,168,76,.2);border-top-color:#c9a84c;border-radius:50%;animation:spin 1s linear infinite}}
+  @keyframes spin{{to{{transform:rotate(360deg)}}}}
+  p{{color:#9b9aac;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;margin:0}}
+  a{{color:#c9a84c;font-size:.7rem;letter-spacing:.1em;text-decoration:none}}
+  a:hover{{text-decoration:underline}}
 </style>
 </head>
 <body>
   <div class="loader"></div>
-  <p>Portföy hazırlanıyor&hellip;</p>
-  <p style="font-size:.68rem;color:#666">Google Drive taranıyor — ilk yükleme ~60-90 sn sürebilir</p>
-  <a href="/portfoy">Yenile →</a>
+  <p>Portföy hazırlanıyor — {status_text}</p>
+  <p style="font-size:.68rem;color:#555">Google Drive taranıyor · ilk yükleme ~60-90 sn sürebilir</p>
+  {err_html}
+  <a href="/portfoy">↻ Yenile</a>
+  <a href="/" style="color:#555">← Ana Sayfa</a>
 </body>
 </html>""", 202
-    return send_file("sunum.html")
 
 
 @app.route("/portfoy/assets/<path:filename>")
@@ -278,36 +350,34 @@ def drive_refresh():
     """
     Drive'ı yeniden tara ve sunum.html'yi güncelle.
     Admin / danışman tarafından tetiklenir.
-    Manifest değişmemişse hızlıca döner.
     """
     if not _drive_lock.acquire(blocking=False):
         return jsonify({"ok": False, "error": "Zaten çalışıyor, lütfen bekleyin."}), 429
 
+    _portfoy_status["running"] = True
+    _portfoy_status["last_attempt"] = time.time()
+
     def _bg():
         try:
             ok, err = _run_drive_to_html()
+            _portfoy_status["error"] = None if ok else err
+            _portfoy_status["running"] = False
             if not ok:
                 print(f"❌ Drive refresh hatası: {err}")
         finally:
             _drive_lock.release()
+            _portfoy_status["running"] = False
 
-    t = threading.Thread(target=_bg, daemon=True)
-    t.start()
+    threading.Thread(target=_bg, daemon=True).start()
     return jsonify({"ok": True, "message": "Drive yenileme başlatıldı."})
 
 
 def _refresh_portfoy_bg():
     """Sunucu başlarken portföy HTML'ini arka planda üret."""
-    def _bg():
-        import time
+    def _delayed():
         time.sleep(5)   # Firebase + diğer init tamamlansın
-        ok, err = _run_drive_to_html()
-        if ok:
-            print("✅ Portföy HTML üretildi (startup)")
-        else:
-            print(f"⚠️  Portföy HTML üretimi başarısız: {err}")
-    t = threading.Thread(target=_bg, daemon=True)
-    t.start()
+        _trigger_portfoy_bg()
+    threading.Thread(target=_delayed, daemon=True).start()
 
 
 # ================================================================
