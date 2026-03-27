@@ -57,3 +57,5 @@ services:
         sync: false
       - key: CUSTOMER_WA_TEMPLATE_NAME
         sync: false
+      - key: GOOGLE_OAUTH_TOKEN
+        sync: false
