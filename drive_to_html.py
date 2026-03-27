@@ -70,8 +70,11 @@ ASSETS_DIR       = "sunum_assets"
 def get_service():
     """
     Google Drive API bağlantısı kurar.
-    Render / production ortamında GOOGLE_SERVICE_ACCOUNT env var'ı kullanır.
-    Lokal geliştirmede OAuth (credentials.json / token.json) ile çalışır.
+    Öncelik sırası:
+      1. GOOGLE_SERVICE_ACCOUNT env var → Service Account JSON string (en güvenli)
+      2. GOOGLE_OAUTH_TOKEN env var     → token.json içeriği (OAuth, refresh_token ile yenilenir)
+      3. token.json dosyası             → lokal geliştirme
+      4. credentials.json + OAuth flow  → lokal ilk kurulum
     """
     # ── 1. Service Account — JSON string (Render env var) ────
     sa_json_str = os.environ.get("GOOGLE_SERVICE_ACCOUNT", "").strip()
@@ -94,25 +97,51 @@ def get_service():
         except Exception as e:
             print(f"  ⚠  SA dosya hatası: {e} — OAuth'a geçiliyor…")
 
-    # ── 3. OAuth akışı (lokal geliştirme) ───────────────────
+    # ── 3. GOOGLE_OAUTH_TOKEN env var → token.json'ı diske yaz ──
+    oauth_token_str = os.environ.get("GOOGLE_OAUTH_TOKEN", "").strip()
+    if oauth_token_str.startswith("{"):
+        try:
+            token_path = Path(TOKEN_FILE)
+            token_path.write_text(oauth_token_str, encoding="utf-8")
+            print("  ✓ GOOGLE_OAUTH_TOKEN env var → token.json'a yazıldı")
+        except Exception as e:
+            print(f"  ⚠  GOOGLE_OAUTH_TOKEN yazma hatası: {e}")
+
+    # ── 4. OAuth akışı (token.json veya credentials.json) ───
     creds = None
     if Path(TOKEN_FILE).exists():
-        creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
+        try:
+            creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
+        except Exception as e:
+            print(f"  ⚠  token.json okunamadı: {e}")
+
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
+            print("  🔄 Token süresi dolmuş, yenileniyor…")
             creds.refresh(Request())
+            # Yenilenen token'ı diske kaydet (Render'da ephemeral ama process boyunca işe yarar)
+            try:
+                with open(TOKEN_FILE, "w") as f:
+                    f.write(creds.to_json())
+                print("  ✓ Token yenilendi ve token.json güncellendi")
+            except Exception as e:
+                print(f"  ⚠  token.json güncellenemedi: {e}")
         else:
             if not Path(CREDS_FILE).exists():
                 raise FileNotFoundError(
-                    f"'{CREDS_FILE}' bulunamadı!\n"
-                    "Seçenekler:\n"
-                    "  A) GOOGLE_SERVICE_ACCOUNT env var'ına SA JSON string yaz (Render için önerilen)\n"
-                    "  B) Google Cloud Console → OAuth 2.0 → credentials.json indir\n"
+                    f"Google Drive kimlik doğrulaması başarısız!\n"
+                    f"Seçenekler:\n"
+                    f"  A) Render → Environment → GOOGLE_OAUTH_TOKEN = token.json içeriği (JSON string)\n"
+                    f"  B) Render → Environment → GOOGLE_SERVICE_ACCOUNT = service account JSON\n"
+                    f"  C) Lokal: credentials.json dosyasını proje köküne koy\n"
+                    f"token.json mevcut: {Path(TOKEN_FILE).exists()} | "
+                    f"credentials.json mevcut: {Path(CREDS_FILE).exists()}"
                 )
             flow  = InstalledAppFlow.from_client_secrets_file(CREDS_FILE, SCOPES)
             creds = flow.run_local_server(port=0)
-        with open(TOKEN_FILE, "w") as f:
-            f.write(creds.to_json())
+            with open(TOKEN_FILE, "w") as f:
+                f.write(creds.to_json())
+
     print("  ✓ Auth: OAuth (token.json)")
     return build("drive", "v3", credentials=creds)
 
