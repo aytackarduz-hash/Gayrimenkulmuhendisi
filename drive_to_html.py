@@ -506,7 +506,7 @@ def _prepare_image(data: bytes, size: tuple) -> tuple:
         img = img.convert("RGB")
     return img
 
-def make_thumb(data: bytes, mime: str, uid: str, size=(600, 400)) -> str:
+def make_thumb(data: bytes, mime: str, uid: str, size=(480, 320)) -> str:
     """Küçük thumbnail → sunum_assets/{uid}_t.jpg  Döner: relative path string"""
     try:
         Path(ASSETS_DIR).mkdir(exist_ok=True)
@@ -520,7 +520,7 @@ def make_thumb(data: bytes, mime: str, uid: str, size=(600, 400)) -> str:
         print(f"    ⚠  Thumbnail hatası ({uid}): {e}")
         return ""
 
-def make_large(data: bytes, mime: str, uid: str, size=(1400, 1050)) -> str:
+def make_large(data: bytes, mime: str, uid: str, size=(1000, 750)) -> str:
     """Büyük görsel → sunum_assets/{uid}_l.jpg  Döner: relative path string"""
     try:
         Path(ASSETS_DIR).mkdir(exist_ok=True)
