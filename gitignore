@@ -1,0 +1,16 @@
+# Firebase — ASLA commit etme
+service-account.json
+*-service-account.json
+firebase-adminsdk*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db

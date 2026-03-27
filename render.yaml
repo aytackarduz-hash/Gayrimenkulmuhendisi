@@ -1,0 +1,58 @@
+services:
+  - type: web
+    name: nexa-flask
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: WA_PHONE_NUMBER_ID
+        sync: false
+      - key: WA_ACCESS_TOKEN
+        sync: false
+      - key: WA_VERIFY_TOKEN
+        sync: false
+      - key: WA_ADVISOR_PHONE
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ADVISOR_EMAIL
+        sync: false
+      - key: EMAIL_PROVIDER
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: EMAIL_FROM_NAME
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: ENABLE_CUSTOMER_EMAIL_AUTOMATION
+        sync: false
+      - key: ENABLE_CUSTOMER_WA_AUTOMATION
+        sync: false
+      # ── Google Drive Portföy ────────────────────────────
+      - key: GDRIVE_FOLDER_ID
+        sync: false
+      - key: GOOGLE_SERVICE_ACCOUNT
+        sync: false
+      - key: PROJE_ADI
+        sync: false
+      - key: PROJE_ALT_BASLIK
+        sync: false
+      - key: VALUATION_WA_TEMPLATE_NAME
+        sync: false
+      - key: CUSTOMER_WA_TEMPLATE_NAME
+        sync: false

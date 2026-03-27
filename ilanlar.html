@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link rel="icon" type="image/jpeg" href="https://i.ibb.co/Tz1MNtv/Whats-App-mage-2026-02-14-at-12-33-50.jpg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>İlanlar | Erdoğan Işık Özel — Dikmen Elite Gayrimenkul</title>
+  <meta name="description" content="Dikmen ve Çankaya'daki tüm satılık ve kiralık gayrimenkul ilanları. Analitik fiyatlama ile özenle seçilmiş portföy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Raleway:wght@200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --deep-navy: #0a1628;
+      --navy: #132238;
+      --navy-light: #1e3a52;
+      --gold: #d4af37;
+      --gold-dark: #b8941f;
+      --gold-light: #f4e4a6;
+      --cream: #faf8f3;
+      --cream-dark: #f0ece1;
+      --gray: #4a5568;
+      --gray-light: #a0aec0;
+      --white: #ffffff;
+      --green: #25d366;
+      --shadow-sm: 0 2px 8px rgba(10,22,40,0.05);
+      --shadow: 0 8px 32px rgba(10,22,40,0.10);
+      --shadow-lg: 0 20px 60px rgba(10,22,40,0.18);
+      --shadow-xl: 0 30px 80px rgba(10,22,40,0.26);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ══ ANKARA ENVIRONMENT BACKGROUND ══════════════════════════ */
+    /* Fixed Ankara fotoğrafı — tüm sayfa arkasında */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: -2;
+      background-image: url('https://images.unsplash.com/photo-1589561253898-768105ca91a8?auto=format&fit=crop&w=1800&q=80');
+      background-size: cover;
+      background-position: center 40%;
+      background-attachment: fixed;
+      filter: brightness(0.55) saturate(0.8) sepia(0.15);
+    }
+    /* Krem renk overlay — okunabilirlik + marka rengi */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        linear-gradient(to bottom,
+          rgba(250,248,243,0.0)   0%,
+          rgba(250,248,243,0.82)  18%,
+          rgba(250,248,243,0.88)  60%,
+          rgba(250,248,243,0.95) 100%
+        ),
+        /* Gold ton hafif ısı */
+        radial-gradient(ellipse 80% 60% at 50% 80%, rgba(212,175,55,0.06) 0%, transparent 70%);
+    }
+
+    /* ── Loader ── */
+    .page-loader {
+      position: fixed; inset: 0; z-index: 99999;
+      background: var(--deep-navy);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 20px;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--gold-light); letter-spacing: 1px;
+    }
+    .loader-bar {
+      width: 160px; height: 2px;
+      background: rgba(212,175,55,0.2); border-radius: 2px; overflow: hidden;
+    }
+    .loader-bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      animation: loaderFill 1.2s ease-out forwards;
+      border-radius: 2px;
+    }
+    @keyframes loaderFill { to { width: 100%; } }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 18px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(10,22,40,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(212,175,55,0.12);
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      padding: 12px 48px;
+      background: rgba(10,22,40,0.98);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--white); text-decoration: none; letter-spacing: 0.5px;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none; font-size: 14px; font-weight: 600;
+      letter-spacing: 0.3px; transition: color 0.25s;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
+    .nav-links a.active { font-weight: 700; }
+    .nav-cta {
+      padding: 9px 22px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--deep-navy) !important;
+      border-radius: 8px; font-weight: 800 !important;
+      box-shadow: 0 4px 14px rgba(212,175,55,0.35);
+      transition: all 0.25s !important;
+    }
+    .nav-cta:hover { box-shadow: 0 6px 20px rgba(212,175,55,0.5) !important; transform: translateY(-1px); }
+    .nav-hamburger {
+      display: none; background: none; border: none;
+      color: var(--white); font-size: 22px; cursor: pointer;
+    }
+
+    /* ── Hero Banner ── */
+    .hero-banner {
+      margin-top: 72px;
+      padding: 64px 48px 60px;
+      position: relative; overflow: hidden;
+      background: #06101e;
+      isolation: isolate;
+    }
+    .hero-banner::before { display: none; }
+
+    /* Arka plan fotoğrafı */
+    .hero-bg-photo {
+      position: absolute; inset: 0; z-index: -3;
+      background-image: url('https://images.unsplash.com/photo-1589561253898-768105ca91a8?auto=format&fit=crop&w=1800&q=80');
+      background-size: cover;
+      background-position: center 35%;
+      filter: brightness(0.30) saturate(0.65);
+      transform: scale(1.06);
+      transition: transform 14s ease-out;
+      will-change: transform;
+    }
+    .hero-banner:hover .hero-bg-photo {
+      transform: scale(1.0);
+    }
+
+    /* Renk atmosfer katmanları */
+    .hero-overlay-gradient {
+      position: absolute; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        linear-gradient(105deg, rgba(6,16,30,0.90) 0%, rgba(6,16,30,0.50) 50%, rgba(6,16,30,0.72) 100%),
+        linear-gradient(to top, rgba(6,16,30,0.98) 0%, transparent 45%);
+    }
+
+    /* Altın ışık huzmesi */
+    .hero-light-beam {
+      position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 65% at 72% 40%, rgba(212,175,55,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 45% at 18% 80%, rgba(100,140,220,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 20% 30% at 88% 15%, rgba(212,175,55,0.05) 0%, transparent 50%);
+    }
+
+    /* Scan-line texture */
+    .hero-scanlines {
+      position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 3px,
+        rgba(0,0,0,0.035) 3px, rgba(0,0,0,0.035) 4px
+      );
+    }
+
+    /* Şehir ışığı partikülleri */
+    .hero-particles {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .hp {
+      position: absolute; border-radius: 50%;
+      animation: hpFloat linear infinite;
+    }
+    @keyframes hpFloat {
+      0%   { opacity:0; transform:translateY(8px) scale(0.3); }
+      20%  { opacity:1; }
+      80%  { opacity:0.5; }
+      100% { opacity:0; transform:translateY(-90px) scale(2); }
+    }
+
+    /* SVG Skyline */
+    .hero-skyline-wrap {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      z-index: 0; pointer-events: none;
+      line-height: 0;
+    }
+    .hero-banner-inner {
+      max-width: 1400px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .hero-breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: rgba(212,175,55,0.6);
+      margin-bottom: 20px;
+    }
+    .hero-breadcrumb a { color: rgba(212,175,55,0.6); text-decoration: none; }
+    .hero-breadcrumb a:hover { color: var(--gold); }
+    .hero-breadcrumb span { color: var(--gold); }
+    .hero-banner h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800; color: var(--white);
+      line-height: 1.15; margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+    .hero-banner h1 em { color: var(--gold-light); font-style: normal; }
+    .hero-banner p {
+      font-size: 16px; color: rgba(255,255,255,0.55);
+      max-width: 560px; line-height: 1.7; margin-bottom: 36px;
+    }
+    .hero-stats-row {
+      display: flex; gap: 40px; flex-wrap: wrap;
+    }
+    .hero-stat {
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--gold-light); line-height: 1;
+    }
+    .hero-stat-lbl {
+      font-size: 12px; color: rgba(255,255,255,0.45);
+      font-weight: 600; letter-spacing: 0.5px;
+    }
+    .hero-stat-divider {
+      width: 1px; height: 44px;
+      background: rgba(212,175,55,0.15); align-self: center;
+    }
+
+    /* ── Main Layout ── */
+    .main-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 48px 48px 80px;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 40px;
+      align-items: start;
+      position: relative; z-index: 1;
+    }
+
+    /* ── SIDEBAR FILTER ── */
+    .sidebar {
+      position: sticky;
+      top: 90px;
+    }
+
+    .sidebar-panel {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(16px) saturate(1.2);
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+      border-radius: 20px;
+      box-shadow: var(--shadow), 0 0 0 1px rgba(212,175,55,0.08);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.65);
+    }
+
+    .sidebar-header {
+      background: linear-gradient(135deg, var(--deep-navy), var(--navy));
+      padding: 22px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(212,175,55,0.1);
+    }
+    .sidebar-header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 600;
+      color: var(--gold-light);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sidebar-header-title i { color: var(--gold); font-size: 15px; }
+    .sidebar-clear-btn {
+      font-size: 11px; font-weight: 700; color: rgba(212,175,55,0.5);
+      background: none; border: none; cursor: pointer; letter-spacing: 0.5px;
+      text-transform: uppercase; transition: color 0.2s;
+      font-family: 'Raleway', sans-serif;
+    }
+    .sidebar-clear-btn:hover { color: var(--gold); }
+
+    .sidebar-section {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(10,22,40,0.06);
+    }
+    .sidebar-section:last-child { border-bottom: none; }
+    .sidebar-section-title {
+      font-size: 11px; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--gray-light);
+      margin-bottom: 14px;
+    }
+
+    /* Type pills */
+    .type-pills {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .type-pill {
+      padding: 7px 18px;
+      border-radius: 50px;
+      font-size: 13px; font-weight: 700;
+      cursor: pointer; border: 2px solid transparent;
+      background: rgba(10,22,40,0.05);
+      color: var(--gray);
+      transition: all 0.25s ease;
+      font-family: 'Raleway', sans-serif;
+    }
+    .type-pill:hover { border-color: var(--gold); color: var(--gold-dark); }
+    .type-pill.active {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--deep-navy); border-color: var(--gold);
+      box-shadow: 0 4px 12px rgba(212,175,55,0.35);
+    }
+
+    /* Rooms grid */
+    .rooms-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+    }
+    .room-pill {
+      padding: 8px 4px; text-align: center;
+      border-radius: 8px; font-size: 12px; font-weight: 700;
+      cursor: pointer; border: 1.5px solid rgba(10,22,40,0.1);
+      background: transparent; color: var(--gray);
+      transition: all 0.2s; font-family: 'Raleway', sans-serif;
+    }
+    .room-pill:hover { border-color: var(--gold); color: var(--gold-dark); }
+    .room-pill.active {
+      background: var(--gold); color: var(--deep-navy);
+      border-color: var(--gold);
+    }
+
+    /* Range inputs */
+    .range-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    .sb-input {
+      width: 100%; padding: 10px 12px;
+      border: 1.5px solid rgba(10,22,40,0.1);
+      border-radius: 10px; font-family: 'Raleway', sans-serif;
+      font-size: 12px; font-weight: 600; color: var(--navy);
+      background: var(--cream); outline: none; transition: all 0.25s;
+    }
+    .sb-input:focus {
+      border-color: var(--gold);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+    }
+    .sb-input::placeholder { color: var(--gray-light); }
+
+    /* Sidebar apply */
+    .sidebar-apply-btn {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--deep-navy), var(--navy));
+      border: none; border-radius: 12px;
+      color: var(--gold-light); font-family: 'Raleway', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.5px;
+      cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 8px; transition: all 0.25s;
+      margin-top: 6px;
+    }
+    .sidebar-apply-btn:hover {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--deep-navy);
+      box-shadow: 0 6px 20px rgba(212,175,55,0.35);
+    }
+
+    /* Active chips in sidebar */
+    .active-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px 4px 12px;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 50px; font-size: 11px; font-weight: 700;
+      color: var(--gold-dark);
+    }
+    .chip button {
+      background: none; border: none; cursor: pointer;
+      color: var(--gold); font-size: 12px; padding: 0; line-height: 1;
+    }
+
+    /* ── CONTENT AREA ── */
+    .content-area {}
+
+    /* Toolbar */
+    .content-toolbar {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px; flex-wrap: wrap; gap: 14px;
+    }
+    .content-count {
+      display: flex; align-items: baseline; gap: 8px;
+    }
+    .content-count-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; font-weight: 700; color: var(--navy); line-height: 1;
+    }
+    .content-count-lbl { font-size: 14px; color: var(--gray); font-weight: 600; }
+
+    .toolbar-right {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sort-select {
+      padding: 9px 14px;
+      background: var(--white);
+      border: 1.5px solid rgba(10,22,40,0.1);
+      border-radius: 10px; color: var(--navy);
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; outline: none; transition: border-color 0.2s;
+    }
+    .sort-select:focus { border-color: var(--gold); }
+    .view-toggle { display: flex; gap: 6px; }
+    .view-btn {
+      width: 38px; height: 38px; border-radius: 10px;
+      border: 1.5px solid rgba(10,22,40,0.1);
+      background: var(--white); color: var(--gray-light);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 14px; transition: all 0.2s;
+    }
+    .view-btn.active, .view-btn:hover {
+      background: var(--deep-navy); color: var(--gold-light);
+      border-color: var(--deep-navy);
+    }
+
+    /* ── LISTING CARDS — Grid View ── */
+    .listings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .lc {
+      background: rgba(255,255,255,0.90);
+      backdrop-filter: blur(12px) saturate(1.15);
+      -webkit-backdrop-filter: blur(12px) saturate(1.15);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm), 0 1px 0 rgba(255,255,255,0.7) inset;
+      border: 1px solid rgba(255,255,255,0.7);
+      transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+      cursor: pointer;
+      animation: fadeUp 0.6s ease-out backwards;
+      position: relative;
+    }
+    .lc::after {
+      content: '';
+      position: absolute; inset: 0; border-radius: 18px;
+      border: 1.5px solid transparent;
+      background: linear-gradient(135deg, rgba(212,175,55,0.4), transparent) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out; mask-composite: exclude;
+      opacity: 0; transition: opacity 0.35s; pointer-events: none; z-index: 2;
+    }
+    .lc:hover::after { opacity: 1; }
+    .lc:hover { transform: translateY(-7px); box-shadow: var(--shadow-lg); }
+
+    /* Featured: spans 2 cols */
+    .lc.lc-featured {
+      grid-column: span 2;
+      display: grid; grid-template-columns: 55% 45%;
+      border-radius: 20px;
+    }
+    .lc.lc-featured .lc-img { height: 100%; min-height: 340px; }
+    .lc.lc-featured .lc-img { border-radius: 20px 0 0 20px; }
+    .lc.lc-featured .lc-title { font-size: 22px; }
+    .lc.lc-featured .lc-price { font-size: 24px; }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(20px); }
+      to { opacity:1; transform: translateY(0); }
+    }
+
+    /* Image */
+    .lc-img {
+      position: relative; height: 255px; overflow: hidden; flex-shrink: 0;
+    }
+    .lc-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .lc:hover .lc-img img { transform: scale(1.07); }
+    .lc-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 45%, rgba(10,22,40,0.75) 100%);
+      pointer-events: none;
+    }
+
+    /* Badge */
+    .lc-badge {
+      position: absolute; top: 14px; left: 14px; z-index: 3;
+      padding: 5px 14px; border-radius: 50px;
+      font-size: 10px; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase; backdrop-filter: blur(8px);
+    }
+    .lc-badge-satilik { background: rgba(212,175,55,0.92); color: var(--deep-navy); }
+    .lc-badge-kiralik { background: rgba(16,185,129,0.9); color: #fff; }
+
+    /* Favorite btn */
+    .lc-fav {
+      position: absolute; top: 12px; right: 12px; z-index: 3;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(8px);
+      border: none; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; font-size: 15px; color: var(--gray-light);
+      transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .lc-fav:hover, .lc-fav.active { color: #e53e3e; }
+
+    /* Price on image */
+    .lc-price-img {
+      position: absolute; bottom: 14px; left: 14px; z-index: 3;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700;
+      color: var(--gold-light);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5); line-height: 1;
+    }
+
+    /* Body */
+    .lc-body {
+      padding: 20px 20px 18px;
+      display: flex; flex-direction: column; gap: 0;
+    }
+
+    .lc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 600;
+      color: var(--navy); line-height: 1.35;
+      margin-bottom: 7px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .lc-loc {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; color: var(--gray-light); font-weight: 600;
+      margin-bottom: 13px; letter-spacing: 0.3px;
+    }
+    .lc-loc i { color: var(--gold); font-size: 10px; }
+
+    .lc-specs {
+      display: flex; flex-wrap: wrap; gap: 7px;
+      margin-bottom: 15px; padding-bottom: 15px;
+      border-bottom: 1px solid rgba(10,22,40,0.06);
+    }
+    .lc-spec {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px;
+      background: rgba(10,22,40,0.04);
+      border: 1px solid rgba(10,22,40,0.07);
+      border-radius: 50px; font-size: 11px; font-weight: 700;
+      color: var(--navy); transition: all 0.2s;
+    }
+    .lc-spec i { color: var(--gold); font-size: 10px; }
+    .lc:hover .lc-spec { background: rgba(212,175,55,0.07); border-color: rgba(212,175,55,0.2); }
+
+    /* Actions */
+    .lc-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 8px; }
+    .lc-btn {
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      padding: 9px; border-radius: 10px; font-size: 12px; font-weight: 700;
+      text-decoration: none; cursor: pointer; border: 1.5px solid transparent;
+      transition: all 0.25s; font-family: 'Raleway', sans-serif;
+    }
+    .lc-btn-wa {
+      background: rgba(37,211,102,0.07); color: #1a9e4d;
+      border-color: rgba(37,211,102,0.2);
+    }
+    .lc-btn-wa:hover {
+      background: var(--green); color: #fff;
+      border-color: var(--green); box-shadow: 0 4px 12px rgba(37,211,102,0.3);
+    }
+    .lc-btn-tel {
+      background: rgba(212,175,55,0.07); color: var(--gold-dark);
+      border-color: rgba(212,175,55,0.2);
+    }
+    .lc-btn-tel:hover {
+      background: var(--gold); color: var(--deep-navy);
+      border-color: var(--gold); box-shadow: 0 4px 12px rgba(212,175,55,0.35);
+    }
+
+    .lc-incele {
+      width: 100%; padding: 11px;
+      background: linear-gradient(135deg, var(--deep-navy), #1a2f4a);
+      color: var(--gold-light); border: none; border-radius: 12px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px; font-weight: 800; letter-spacing: 0.5px;
+      cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 7px; transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .lc-incele::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(212,175,55,0.2), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .lc-incele:hover { box-shadow: 0 8px 24px rgba(10,22,40,0.3); }
+    .lc-incele:hover::before { opacity: 1; }
+    .lc-incele i { transition: transform 0.3s; }
+    .lc-incele:hover i { transform: translateX(4px); }
+
+    /* ── LIST VIEW ── */
+    .listings-list { display: flex; flex-direction: column; gap: 18px; }
+    .listings-list .lc {
+      display: grid; grid-template-columns: 280px 1fr;
+      border-radius: 16px;
+    }
+    .listings-list .lc.lc-featured { grid-column: 1; grid-template-columns: 280px 1fr; }
+    .listings-list .lc-img { height: 100%; min-height: 190px; border-radius: 16px 0 0 16px; }
+    .listings-list .lc-body { padding: 24px 28px; justify-content: center; }
+    .listings-list .lc-title { font-size: 19px; -webkit-line-clamp: 2; }
+    .listings-list .lc-actions { grid-template-columns: 140px 140px; }
+
+    /* ── SKELETON ── */
+    .lc-sk {
+      background: var(--white); border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(10,22,40,0.05);
+    }
+    .lc-sk-img {
+      height: 255px;
+      background: linear-gradient(90deg, #f0ece1 25%, #faf8f3 50%, #f0ece1 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    .lc-sk-body { padding: 20px; }
+    .lc-sk-line {
+      height: 13px; border-radius: 7px; margin-bottom: 10px;
+      background: linear-gradient(90deg, #f0ece1 25%, #faf8f3 50%, #f0ece1 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      grid-column: 1/-1; text-align: center; padding: 100px 30px;
+      animation: fadeUp 0.5s ease-out;
+    }
+    .empty-icon {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: rgba(212,175,55,0.08);
+      border: 2px solid rgba(212,175,55,0.15);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 36px; color: rgba(212,175,55,0.4);
+    }
+    .empty-state h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; color: var(--navy); margin-bottom: 10px;
+    }
+    .empty-state p { font-size: 15px; color: var(--gray-light); }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex; justify-content: center;
+      align-items: center; gap: 8px; margin-top: 48px;
+    }
+    .page-btn {
+      width: 42px; height: 42px; border-radius: 10px;
+      border: 1.5px solid rgba(10,22,40,0.1);
+      background: var(--white); color: var(--navy);
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .page-btn:hover { border-color: var(--gold); color: var(--gold-dark); }
+    .page-btn.active {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--deep-navy); border-color: var(--gold);
+      box-shadow: 0 4px 12px rgba(212,175,55,0.35);
+    }
+    .page-btn:disabled { opacity: 0.35; cursor: default; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1200px) {
+      .listings-grid { grid-template-columns: repeat(2, 1fr); }
+      .lc.lc-featured { grid-column: span 2; }
+    }
+    @media (max-width: 1024px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .sidebar-panel { display: grid; grid-template-columns: 1fr 1fr; }
+      .sidebar-header { grid-column: 1 / -1; }
+      .hero-banner { padding: 48px 28px 44px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      nav.scrolled { padding: 10px 20px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+      .main-layout { padding: 28px 16px 60px; }
+      .hero-banner { padding: 40px 20px 36px; margin-top: 60px; }
+      .hero-stats-row { gap: 24px; }
+      .listings-grid { grid-template-columns: 1fr; }
+      .lc.lc-featured { grid-column: 1; grid-template-columns: 1fr; }
+      .lc.lc-featured .lc-img { height: 220px; border-radius: 20px 20px 0 0; }
+      .sidebar-panel { grid-template-columns: 1fr; }
+      .listings-list .lc { grid-template-columns: 1fr; }
+      .listings-list .lc-img { min-height: 210px; border-radius: 16px 16px 0 0; }
+    }
+
+    /* ── FLOAT BUTTONS ── */
+    .float-wa {
+      position: fixed; bottom: 30px; right: 30px; z-index: 996;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--green); color: #fff;
+      font-size: 26px; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.45);
+      text-decoration: none; transition: all 0.3s;
+      animation: pulse-green 2.5s infinite;
+    }
+    .float-wa:hover { transform: scale(1.1); animation: none; }
+    @keyframes pulse-green {
+      0%,100% { box-shadow: 0 8px 28px rgba(37,211,102,0.45); }
+      50% { box-shadow: 0 8px 40px rgba(37,211,102,0.7); }
+    }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(10,22,40,0.97); backdrop-filter: blur(20px);
+      flex-direction: column; padding: 80px 32px 40px;
+      gap: 28px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 600;
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--gold-light); }
+    .mobile-nav-close {
+      position: absolute; top: 20px; right: 24px;
+      background: none; border: none; color: rgba(255,255,255,0.5);
+      font-size: 26px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-logo">Erdoğan Işık Özel</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <a class="nav-logo" href="/">Erdoğan<span> Işık</span> Özel</a>
+    <div class="nav-links">
+      <a href="/">Ana Sayfa</a>
+      <a href="ilanlar.html" class="active"><i class="fas fa-building" style="margin-right:4px;color:var(--gold);font-size:12px;"></i>İlanlar</a>
+      <a href="/portfoy"><i class="fas fa-layer-group" style="margin-right:4px;color:var(--gold);font-size:12px;"></i>Proje Arşivi</a>
+      <a href="/#harita"><i class="fas fa-map-marker-alt" style="margin-right:4px;color:var(--gold);font-size:12px;"></i>Harita</a>
+      <a href="/#contact">İletişim</a>
+      <a href="admin.html" style="font-size:12px;opacity:0.6;"><i class="fas fa-cog" style="margin-right:4px;"></i>Admin</a>
+      <a href="https://wa.me/905324514008" target="_blank" class="nav-cta">
+        <i class="fab fa-whatsapp" style="margin-right:6px;"></i>WhatsApp
+      </a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger"><i class="fas fa-bars"></i></button>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" id="mobileNavClose"><i class="fas fa-times"></i></button>
+    <a href="/">Ana Sayfa</a>
+    <a href="ilanlar.html">İlanlar</a>
+    <a href="/#harita">Harita</a>
+    <a href="/#contact">İletişim</a>
+    <a href="admin.html">Admin</a>
+  </div>
+
+  <!-- Hero Banner -->
+  <div class="hero-banner" id="heroBanner">
+
+    <!-- Katman 1: Arka plan fotoğrafı -->
+    <div class="hero-bg-photo" id="heroBgPhoto"></div>
+
+    <!-- Katman 2: Renk gradyanları -->
+    <div class="hero-overlay-gradient"></div>
+
+    <!-- Katman 3: Altın ışık -->
+    <div class="hero-light-beam"></div>
+
+    <!-- Katman 4: Scan texture -->
+    <div class="hero-scanlines"></div>
+
+    <!-- Katman 5: Şehir ışığı partikülleri -->
+    <div class="hero-particles" id="heroParticles"></div>
+
+    <!-- Katman 6: Ankara skyline SVG -->
+    <div class="hero-skyline-wrap">
+      <svg viewBox="0 0 1440 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+           style="width:100%;height:140px;display:block;">
+        <!-- Arka bina grubu — koyu -->
+        <g fill="rgba(10,22,40,0.55)">
+          <rect x="0"   y="80"  width="60"  height="60"/>
+          <rect x="55"  y="60"  width="50"  height="80"/>
+          <rect x="100" y="75"  width="35"  height="65"/>
+          <rect x="130" y="50"  width="45"  height="90"/>
+          <rect x="170" y="68"  width="30"  height="72"/>
+          <rect x="195" y="40"  width="55"  height="100"/>
+          <rect x="245" y="65"  width="40"  height="75"/>
+          <rect x="280" y="55"  width="50"  height="85"/>
+          <rect x="325" y="72"  width="35"  height="68"/>
+          <rect x="355" y="48"  width="48"  height="92"/>
+          <rect x="398" y="62"  width="42"  height="78"/>
+          <rect x="435" y="38"  width="60"  height="102"/>
+          <!-- Atakule bölgesi -->
+          <rect x="490" y="15"  width="10"  height="125"/> <!-- kule gövde -->
+          <rect x="485" y="12"  width="20"  height="8"/>   <!-- kule taç -->
+          <rect x="493" y="4"   width="4"   height="12"/>  <!-- anten -->
+          <rect x="480" y="68"  width="30"  height="72"/>
+          <rect x="505" y="55"  width="50"  height="85"/>
+          <rect x="550" y="70"  width="38"  height="70"/>
+          <rect x="583" y="44"  width="55"  height="96"/>
+          <rect x="632" y="60"  width="42"  height="80"/>
+          <rect x="668" y="52"  width="48"  height="88"/>
+          <rect x="710" y="70"  width="36"  height="70"/>
+          <rect x="740" y="42"  width="58"  height="98"/>
+          <rect x="792" y="65"  width="40"  height="75"/>
+          <rect x="826" y="55"  width="50"  height="85"/>
+          <rect x="870" y="72"  width="33"  height="68"/>
+          <rect x="898" y="46"  width="52"  height="94"/>
+          <rect x="944" y="63"  width="44"  height="77"/>
+          <rect x="982" y="50"  width="55"  height="90"/>
+          <rect x="1030" y="68" width="38"  height="72"/>
+          <rect x="1062" y="42" width="60"  height="98"/>
+          <rect x="1116" y="58" width="42"  height="82"/>
+          <rect x="1152" y="48" width="52"  height="92"/>
+          <rect x="1198" y="66" width="36"  height="74"/>
+          <rect x="1228" y="40" width="58"  height="100"/>
+          <rect x="1280" y="60" width="44"  height="80"/>
+          <rect x="1318" y="52" width="50"  height="88"/>
+          <rect x="1362" y="70" width="38"  height="70"/>
+          <rect x="1394" y="45" width="46"  height="95"/>
+        </g>
+        <!-- Ön bina grubu — daha koyu, zemin hissi -->
+        <g fill="rgba(6,10,18,0.80)">
+          <rect x="0"   y="95"  width="80"  height="45"/>
+          <rect x="75"  y="88"  width="65"  height="52"/>
+          <rect x="135" y="100" width="50"  height="40"/>
+          <rect x="180" y="82"  width="70"  height="58"/>
+          <rect x="244" y="92"  width="55"  height="48"/>
+          <rect x="294" y="85"  width="75"  height="55"/>
+          <rect x="362" y="96"  width="48"  height="44"/>
+          <rect x="404" y="80"  width="72"  height="60"/>
+          <rect x="470" y="94"  width="52"  height="46"/>
+          <rect x="516" y="86"  width="68"  height="54"/>
+          <rect x="578" y="98"  width="46"  height="42"/>
+          <rect x="618" y="82"  width="74"  height="58"/>
+          <rect x="686" y="90"  width="58"  height="50"/>
+          <rect x="738" y="84"  width="70"  height="56"/>
+          <rect x="802" y="96"  width="50"  height="44"/>
+          <rect x="846" y="80"  width="76"  height="60"/>
+          <rect x="916" y="92"  width="54"  height="48"/>
+          <rect x="964" y="86"  width="66"  height="54"/>
+          <rect x="1024" y="98" width="48"  height="42"/>
+          <rect x="1066" y="82" width="72"  height="58"/>
+          <rect x="1132" y="90" width="56"  height="50"/>
+          <rect x="1182" y="84" width="68"  height="56"/>
+          <rect x="1244" y="96" width="50"  height="44"/>
+          <rect x="1288" y="80" width="78"  height="60"/>
+          <rect x="1360" y="92" width="80"  height="48"/>
+        </g>
+        <!-- Zemin şeridi -->
+        <rect x="0" y="132" width="1440" height="8" fill="rgba(6,10,18,0.95)"/>
+        <!-- Pencere ışıkları (küçük sarı kareler) -->
+        <g fill="rgba(212,175,55,0.45)">
+          <rect x="60"  y="66"  width="3" height="3"/>
+          <rect x="68"  y="72"  width="3" height="3"/>
+          <rect x="140" y="57"  width="3" height="3"/>
+          <rect x="148" y="63"  width="3" height="3"/>
+          <rect x="205" y="48"  width="3" height="3"/>
+          <rect x="213" y="55"  width="3" height="3"/>
+          <rect x="221" y="48"  width="3" height="3"/>
+          <rect x="290" y="62"  width="3" height="3"/>
+          <rect x="298" y="68"  width="3" height="3"/>
+          <rect x="365" y="54"  width="3" height="3"/>
+          <rect x="373" y="60"  width="3" height="3"/>
+          <rect x="445" y="44"  width="3" height="3"/>
+          <rect x="453" y="51"  width="3" height="3"/>
+          <rect x="461" y="44"  width="3" height="3"/>
+          <rect x="512" y="61"  width="3" height="3"/>
+          <rect x="520" y="67"  width="3" height="3"/>
+          <rect x="592" y="50"  width="3" height="3"/>
+          <rect x="600" y="57"  width="3" height="3"/>
+          <rect x="640" y="66"  width="3" height="3"/>
+          <rect x="648" y="72"  width="3" height="3"/>
+          <rect x="678" y="58"  width="3" height="3"/>
+          <rect x="686" y="64"  width="3" height="3"/>
+          <rect x="748" y="48"  width="3" height="3"/>
+          <rect x="756" y="54"  width="3" height="3"/>
+          <rect x="764" y="48"  width="3" height="3"/>
+          <rect x="835" y="61"  width="3" height="3"/>
+          <rect x="843" y="67"  width="3" height="3"/>
+          <rect x="908" y="52"  width="3" height="3"/>
+          <rect x="916" y="58"  width="3" height="3"/>
+          <rect x="952" y="69"  width="3" height="3"/>
+          <rect x="990" y="56"  width="3" height="3"/>
+          <rect x="998" y="62"  width="3" height="3"/>
+          <rect x="1070" y="48" width="3" height="3"/>
+          <rect x="1078" y="55" width="3" height="3"/>
+          <rect x="1086" y="48" width="3" height="3"/>
+          <rect x="1160" y="64" width="3" height="3"/>
+          <rect x="1168" y="70" width="3" height="3"/>
+          <rect x="1235" y="55" width="3" height="3"/>
+          <rect x="1243" y="61" width="3" height="3"/>
+          <rect x="1296" y="46" width="3" height="3"/>
+          <rect x="1304" y="52" width="3" height="3"/>
+          <rect x="1312" y="46" width="3" height="3"/>
+          <rect x="1370" y="60" width="3" height="3"/>
+          <rect x="1378" y="66" width="3" height="3"/>
+        </g>
+        <!-- Atakule pencere ışıkları -->
+        <g fill="rgba(212,175,55,0.6)">
+          <rect x="492" y="22" width="2" height="2"/>
+          <rect x="492" y="28" width="2" height="2"/>
+          <rect x="492" y="34" width="2" height="2"/>
+          <rect x="492" y="40" width="2" height="2"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- İçerik -->
+    <div class="hero-banner-inner">
+      <div class="hero-breadcrumb">
+        <a href="/">Ana Sayfa</a>
+        <i class="fas fa-chevron-right" style="font-size:9px;"></i>
+        <span>İlanlar</span>
+      </div>
+      <h1>Dikmen'de <em>Seçkin</em><br/>Gayrimenkuller</h1>
+      <p>1149m rakımda, Dikmen Vadisi manzaralı ve metro-otobüs bağlantılı prestijli konumlarda özenle seçilmiş portföy</p>
+      <div class="hero-stats-row" id="heroStats">
+        <div class="hero-stat">
+          <div class="hero-stat-num" id="statTotal">—</div>
+          <div class="hero-stat-lbl">Aktif İlan</div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-num" id="statSatilik">—</div>
+          <div class="hero-stat-lbl">Satılık</div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-num" id="statKiralik">—</div>
+          <div class="hero-stat-lbl">Kiralık</div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">15+</div>
+          <div class="hero-stat-lbl">Yıl Deneyim</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+      <div class="sidebar-panel">
+
+        <!-- Header -->
+        <div class="sidebar-header">
+          <div class="sidebar-header-title">
+            <i class="fas fa-sliders-h"></i> Filtrele
+          </div>
+          <button class="sidebar-clear-btn" id="clearAllBtn">Temizle</button>
+        </div>
+
+        <!-- Active chips -->
+        <div class="sidebar-section" id="activeChipsSection" style="display:none;">
+          <div class="sidebar-section-title">Aktif Filtreler</div>
+          <div class="active-chips" id="activeChips"></div>
+        </div>
+
+        <!-- Type -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">İlan Tipi</div>
+          <div class="type-pills">
+            <button class="type-pill active" data-type="">Tümü</button>
+            <button class="type-pill" data-type="Satılık">Satılık</button>
+            <button class="type-pill" data-type="Kiralık">Kiralık</button>
+          </div>
+        </div>
+
+        <!-- Rooms -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Oda Sayısı</div>
+          <div class="rooms-grid">
+            <button class="room-pill" data-rooms="">Tümü</button>
+            <button class="room-pill" data-rooms="1+0">1+0</button>
+            <button class="room-pill" data-rooms="1+1">1+1</button>
+            <button class="room-pill" data-rooms="2+1">2+1</button>
+            <button class="room-pill" data-rooms="3+1">3+1</button>
+            <button class="room-pill" data-rooms="4+1">4+1</button>
+            <button class="room-pill" data-rooms="5+1">5+1</button>
+            <button class="room-pill" data-rooms="5+2">5+2</button>
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Fiyat Aralığı (₺)</div>
+          <div class="range-row">
+            <input type="number" class="sb-input" id="sbMinPrice" placeholder="Min">
+            <input type="number" class="sb-input" id="sbMaxPrice" placeholder="Max">
+          </div>
+        </div>
+
+        <!-- Area -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Alan (m²)</div>
+          <div class="range-row">
+            <input type="number" class="sb-input" id="sbMinArea" placeholder="Min">
+            <input type="number" class="sb-input" id="sbMaxArea" placeholder="Max">
+          </div>
+        </div>
+
+        <!-- Apply -->
+        <div class="sidebar-section">
+          <button class="sidebar-apply-btn" id="applyBtn">
+            <i class="fas fa-search"></i> Filtrele
+          </button>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ── CONTENT ── -->
+    <div class="content-area">
+
+      <!-- Toolbar -->
+      <div class="content-toolbar">
+        <div class="content-count">
+          <span class="content-count-num" id="countNum">—</span>
+          <span class="content-count-lbl">ilan listeleniyor</span>
+        </div>
+        <div class="toolbar-right">
+          <select class="sort-select" id="sortSelect">
+            <option value="default">Varsayılan</option>
+            <option value="price_asc">Fiyat ↑</option>
+            <option value="price_desc">Fiyat ↓</option>
+            <option value="area_desc">En Büyük</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridViewBtn" title="Grid">
+              <i class="fas fa-th-large"></i>
+            </button>
+            <button class="view-btn" id="listViewBtn" title="Liste">
+              <i class="fas fa-list"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div class="listings-grid" id="listingsGrid"></div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination"></div>
+
+    </div>
+  </div>
+
+  <!-- Float WhatsApp -->
+  <a class="float-wa" href="https://wa.me/905324514008?text=Merhaba%2C%20ilan%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ══ NexaPreview Modal — Yeniden Tasarım ══════════════════════ -->
+  <style>
+    /* ── Overlay ───────────────────────────────────────────────── */
+    #nxp-overlay{
+      position:fixed;inset:0;z-index:99999;
+      background:rgba(6,8,14,.92);backdrop-filter:blur(14px);
+      display:flex;align-items:stretch;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity .3s ease;
+    }
+    #nxp-overlay.nxp-open{opacity:1;pointer-events:auto;}
+
+    /* ── Modal shell — side-by-side layout ─────────────────────── */
+    #nxp-modal{
+      display:flex;flex-direction:row;
+      width:100%;max-width:100%;height:100vh;
+      transform:scale(.97) translateY(18px);
+      transition:transform .42s cubic-bezier(.22,.61,.36,1);
+    }
+    #nxp-overlay.nxp-open #nxp-modal{transform:scale(1) translateY(0);}
+
+    /* ── LEFT — gallery panel ──────────────────────────────────── */
+    #nxp-gallery{
+      flex:0 0 58%;
+      display:flex;flex-direction:column;
+      background:#06080e;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Main slider viewport */
+    #nxp-sl-wrap{
+      flex:1;
+      position:relative;
+      overflow:hidden;
+      background:#0a0c14;
+      cursor:zoom-in;
+      user-select:none;
+    }
+    #nxp-sl-track{
+      display:flex;
+      height:100%;
+      transition:transform .45s cubic-bezier(.22,.61,.36,1);
+    }
+    .nxp-slide{
+      min-width:100%;height:100%;
+      position:relative;
+      display:flex;align-items:center;justify-content:center;
+    }
+    /* ★ KEY: contain = tam fotoğraf, kesilme yok */
+    .nxp-slide img{
+      max-width:100%;max-height:100%;
+      width:100%;height:100%;
+      object-fit:contain;
+      display:block;
+    }
+    /* subtle vignette */
+    .nxp-slide::after{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,.35) 100%);
+      pointer-events:none;
+    }
+    .nxp-no-img{
+      width:100%;height:100%;min-height:300px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:12px;color:#3a3a4a;font-size:.8rem;
+    }
+    .nxp-no-img i{font-size:2.5rem;opacity:.3;}
+
+    /* Prev / Next arrows */
+    .nxp-sl-btn{
+      position:absolute;top:50%;transform:translateY(-50%);
+      width:46px;height:46px;border-radius:50%;
+      background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.14);
+      color:#fff;font-size:1rem;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;z-index:10;
+      transition:background .2s,border-color .2s,transform .2s;
+    }
+    .nxp-sl-btn:hover{
+      background:#c9a84c;border-color:#c9a84c;color:#0c0c11;
+      transform:translateY(-50%) scale(1.08);
+    }
+    #nxp-sl-prev{left:16px;}
+    #nxp-sl-next{right:16px;}
+
+    /* counter badge */
+    #nxp-sl-count{
+      position:absolute;top:14px;right:16px;z-index:10;
+      background:rgba(0,0,0,.65);backdrop-filter:blur(6px);
+      color:rgba(255,255,255,.8);font-size:.67rem;letter-spacing:.08em;
+      padding:5px 11px;border-radius:20px;
+      border:1px solid rgba(255,255,255,.1);
+    }
+
+    /* fullscreen btn */
+    #nxp-fullscreen-btn{
+      position:absolute;bottom:16px;right:16px;z-index:10;
+      width:36px;height:36px;border-radius:8px;
+      background:rgba(0,0,0,.65);backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.7);font-size:.85rem;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;transition:all .2s;
+    }
+    #nxp-fullscreen-btn:hover{background:#c9a84c;color:#0c0c11;border-color:#c9a84c;}
+
+    /* ── Thumbnail strip ───────────────────────────────────────── */
+    #nxp-thumbs{
+      display:flex;
+      gap:5px;
+      padding:10px 12px;
+      overflow-x:auto;
+      background:#06080e;
+      flex-shrink:0;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(201,168,76,.2) transparent;
+    }
+    #nxp-thumbs::-webkit-scrollbar{height:3px;}
+    #nxp-thumbs::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);border-radius:2px;}
+
+    .nxp-thumb{
+      width:90px;height:62px;
+      flex-shrink:0;border-radius:6px;overflow:hidden;
+      border:2px solid transparent;
+      cursor:pointer;opacity:.45;
+      transition:border-color .18s,opacity .18s,transform .18s;
+      position:relative;
+    }
+    .nxp-thumb:hover{opacity:.8;transform:translateY(-2px);}
+    .nxp-thumb.active{border-color:#c9a84c;opacity:1;transform:translateY(-2px);}
+    .nxp-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+    .nxp-thumb-num{
+      position:absolute;bottom:3px;right:4px;
+      font-size:.55rem;color:rgba(255,255,255,.6);
+      background:rgba(0,0,0,.5);padding:1px 4px;border-radius:3px;
+    }
+
+    /* ── RIGHT — info panel ────────────────────────────────────── */
+    #nxp-info{
+      flex:1;
+      background:#111118;
+      overflow-y:auto;
+      position:relative;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(201,168,76,.1) transparent;
+      border-left:1px solid rgba(255,255,255,.06);
+    }
+    #nxp-info::-webkit-scrollbar{width:3px;}
+    #nxp-info::-webkit-scrollbar-thumb{background:rgba(201,168,76,.15);border-radius:2px;}
+
+    /* close btn — top-right of info panel */
+    #nxp-close{
+      position:sticky;top:0;z-index:20;
+      display:flex;align-items:center;justify-content:flex-end;
+      padding:14px 16px 0;
+      background:transparent;
+      pointer-events:none;
+    }
+    #nxp-close-btn{
+      width:34px;height:34px;border-radius:50%;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.7);font-size:.85rem;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:all .2s;pointer-events:auto;flex-shrink:0;
+    }
+    #nxp-close-btn:hover{background:#c9a84c;color:#0c0c11;border-color:#c9a84c;}
+
+    /* loader */
+    #nxp-loader{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:80px 30px;gap:16px;color:#4a4a5e;font-size:.82rem;
+    }
+    .nxp-spinner{
+      width:38px;height:38px;
+      border:3px solid rgba(201,168,76,.12);
+      border-top-color:#c9a84c;
+      border-radius:50%;
+      animation:nxpSpin .75s linear infinite;
+    }
+    @keyframes nxpSpin{to{transform:rotate(360deg)}}
+
+    /* body content */
+    #nxp-body{padding:0 28px 36px;}
+
+    #nxp-m-tag{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
+      color:#c9a84c;border:1px solid rgba(201,168,76,.22);
+      padding:5px 12px;border-radius:20px;margin-bottom:14px;
+      background:rgba(201,168,76,.06);
+    }
+    #nxp-m-tag::before{
+      content:'';width:5px;height:5px;border-radius:50%;
+      background:#c9a84c;animation:nxpPulse 2s infinite;
+    }
+    @keyframes nxpPulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+    #nxp-m-title{
+      font-family:'Playfair Display',serif;
+      font-size:1.6rem;font-weight:700;
+      color:#f0ece4;line-height:1.3;margin-bottom:10px;
+    }
+    #nxp-m-loc{
+      display:flex;align-items:center;gap:6px;
+      font-size:.76rem;color:#5a5a72;margin-bottom:26px;
+    }
+    #nxp-m-loc svg{flex-shrink:0;color:#c9a84c;}
+
+    /* stats grid */
+    #nxp-m-stats{
+      display:grid;grid-template-columns:repeat(2,1fr);
+      gap:1px;background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:10px;overflow:hidden;
+      margin-bottom:24px;
+    }
+    .nxp-stat{
+      background:#1a1a24;padding:16px 18px;
+      display:flex;flex-direction:column;gap:5px;
+      transition:background .2s;
+    }
+    .nxp-stat:hover{background:#1e1e2a;}
+    .nxp-stat-l{font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#5a5a72;}
+    .nxp-stat-v{
+      font-family:'Playfair Display',serif;
+      font-size:1.1rem;font-weight:600;color:#f0ece4;
+    }
+
+    /* features */
+    .nxp-feats-title{
+      font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;
+      color:#5a5a72;margin-bottom:10px;
+    }
+    .nxp-feat-grid{
+      display:grid;grid-template-columns:repeat(2,1fr);
+      gap:6px;margin-bottom:24px;
+    }
+    .nxp-feat-row{
+      display:flex;justify-content:space-between;align-items:center;
+      gap:8px;padding:9px 12px;
+      background:#1a1a24;border:1px solid rgba(255,255,255,.05);
+      border-radius:7px;font-size:.74rem;
+    }
+    .nxp-feat-row .fl{color:#5a5a72;flex-shrink:0;}
+    .nxp-feat-row .fv{color:#d8d4cc;font-weight:500;text-align:right;}
+
+    /* description */
+    #nxp-m-desc{
+      font-size:.8rem;line-height:1.7;color:#5a5a72;
+      margin-bottom:24px;padding:14px 16px;
+      background:#1a1a24;border:1px solid rgba(255,255,255,.05);
+      border-radius:8px;
+    }
+
+    /* price bar */
+    #nxp-m-price-bar{
+      display:flex;align-items:baseline;gap:12px;
+      padding:20px 0;
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      margin-bottom:20px;
+    }
+    .nxp-price-lbl{
+      font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#5a5a72;
+    }
+    #nxp-m-price{
+      font-family:'Playfair Display',serif;
+      font-size:2rem;font-weight:700;color:#e8c97a;line-height:1;
+    }
+
+    /* agent */
+    #nxp-m-agent{
+      display:flex;align-items:center;gap:14px;
+      background:#1a1a24;border:1px solid rgba(255,255,255,.05);
+      border-radius:10px;padding:14px 16px;margin-bottom:20px;
+    }
+    #nxp-m-agent-avatar{
+      width:46px;height:46px;border-radius:50%;
+      background:linear-gradient(135deg,#c9a84c,#8b6914);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Playfair Display',serif;font-size:16px;font-weight:700;
+      color:#0c0c11;flex-shrink:0;
+      border:2px solid rgba(201,168,76,.3);
+    }
+    .nxp-aname{font-size:.86rem;font-weight:600;color:#f0ece4;}
+    .nxp-aoff{font-size:.64rem;color:#c9a84c;margin-top:3px;letter-spacing:.06em;}
+    .nxp-astars{color:#c9a84c;font-size:.7rem;margin-top:4px;letter-spacing:1px;}
+
+    /* action buttons */
+    #nxp-m-actions{display:flex;gap:9px;margin-bottom:0;}
+    .nxp-btn{
+      flex:1;padding:13px 10px;border-radius:8px;
+      font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+      cursor:pointer;text-decoration:none;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      transition:all .2s;border:1px solid transparent;
+    }
+    .nxp-btn-wa{background:#25D366;color:#fff;border-color:#25D366;}
+    .nxp-btn-wa:hover{background:#1ebe59;border-color:#1ebe59;transform:translateY(-1px);}
+    .nxp-btn-kredi{
+      background:rgba(201,168,76,.1);color:#c9a84c;
+      border-color:rgba(201,168,76,.3);
+    }
+    .nxp-btn-kredi:hover{background:#c9a84c;color:#0c0c11;border-color:#c9a84c;}
+    .nxp-btn-out{
+      background:transparent;color:#8a8a9a;
+      border-color:rgba(255,255,255,.08);
+      flex:0 0 auto;padding:13px 18px;
+    }
+    .nxp-btn-out:hover{border-color:#c9a84c;color:#c9a84c;}
+
+    /* Kredi panel */
+    #nxp-kredi-panel{
+      margin-top:16px;padding:20px;
+      background:#0e0e18;border:1px solid rgba(201,168,76,.15);
+      border-radius:10px;display:none;
+    }
+    .nxp-kredi-header{
+      display:flex;justify-content:space-between;align-items:center;
+      margin-bottom:16px;
+    }
+    .nxp-kredi-header h3{
+      font-family:'Playfair Display',serif;
+      color:#e8c97a;font-size:1rem;
+    }
+    .nxp-kredi-close{
+      background:none;border:none;color:#5a5a72;
+      cursor:pointer;font-size:1.1rem;line-height:1;
+    }
+    .nxp-kredi-inputs{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:12px;margin-bottom:14px;
+    }
+    .nxp-kredi-inputs label{
+      font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;
+      color:#5a5a72;display:block;margin-bottom:6px;
+    }
+    .nxp-kredi-inputs input,
+    .nxp-kredi-inputs select{
+      width:100%;background:#06080e;
+      border:1px solid rgba(255,255,255,.1);border-radius:6px;
+      padding:9px 11px;color:#d8d4cc;font-size:.82rem;outline:none;
+    }
+    .nxp-kredi-inputs input:focus,
+    .nxp-kredi-inputs select:focus{border-color:rgba(201,168,76,.4);}
+    #nxp-kredi-result{
+      display:none;
+      background:#06080e;border:1px solid rgba(201,168,76,.18);
+      border-radius:8px;padding:16px;margin-top:14px;
+    }
+    .nxp-k-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;}
+    .nxp-k-row > div > .kl{font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:#5a5a72;margin-bottom:4px;}
+    .nxp-k-row > div > .kv{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;}
+    .nxp-k-row > div:nth-child(1) .kv{color:#e8c97a;}
+    .nxp-k-row > div:nth-child(2) .kv{color:#f0ece4;}
+    .nxp-k-row > div:nth-child(3) .kv{color:#8a8a9a;}
+    .nxp-kredi-note{font-size:.58rem;color:#5a5a72;margin-top:10px;text-align:center;}
+
+    /* ── Fullscreen lightbox ───────────────────────────────────── */
+    #nxp-lightbox{
+      position:fixed;inset:0;z-index:999999;
+      background:#000;
+      display:none;align-items:center;justify-content:center;
+    }
+    #nxp-lightbox.open{display:flex;}
+    #nxp-lb-img{
+      max-width:100%;max-height:100vh;
+      object-fit:contain;
+    }
+    #nxp-lb-close{
+      position:absolute;top:18px;right:20px;
+      width:40px;height:40px;border-radius:50%;
+      background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+      color:#fff;font-size:1.1rem;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;transition:all .2s;
+    }
+    #nxp-lb-close:hover{background:#c9a84c;color:#000;border-color:#c9a84c;}
+    #nxp-lb-prev,#nxp-lb-next{
+      position:absolute;top:50%;transform:translateY(-50%);
+      width:50px;height:50px;border-radius:50%;
+      background:rgba(0,0,0,.55);backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,.15);
+      color:#fff;font-size:1.2rem;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;transition:all .2s;
+    }
+    #nxp-lb-prev:hover,#nxp-lb-next:hover{background:#c9a84c;color:#000;border-color:#c9a84c;}
+    #nxp-lb-prev{left:20px;}#nxp-lb-next{right:20px;}
+    #nxp-lb-counter{
+      position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+      color:rgba(255,255,255,.6);font-size:.72rem;letter-spacing:.1em;
+      background:rgba(0,0,0,.5);padding:5px 14px;border-radius:20px;
+    }
+
+    /* ── Responsive ────────────────────────────────────────────── */
+    @media(max-width:860px){
+      #nxp-modal{flex-direction:column;}
+      #nxp-gallery{flex:0 0 auto;max-height:55vh;}
+      #nxp-sl-wrap{min-height:220px;}
+      #nxp-info{flex:1;overflow-y:auto;}
+      #nxp-body{padding:0 18px 28px;}
+      #nxp-m-title{font-size:1.25rem;}
+      #nxp-m-price{font-size:1.6rem;}
+      #nxp-m-actions{flex-wrap:wrap;}
+      .nxp-btn-out{flex:1 1 100%;}
+      .nxp-kredi-inputs{grid-template-columns:1fr 1fr;}
+      .nxp-feat-grid{grid-template-columns:1fr;}
+    }
+    @media(max-width:500px){
+      .nxp-sl-btn{display:none;}
+      #nxp-gallery{max-height:48vh;}
+      .nxp-thumb{width:72px;height:50px;}
+    }
+  </style>
+
+  <!-- Fullscreen lightbox -->
+  <div id="nxp-lightbox">
+    <img id="nxp-lb-img" src="" alt="">
+    <button id="nxp-lb-close">✕</button>
+    <button id="nxp-lb-prev">&#8592;</button>
+    <button id="nxp-lb-next">&#8594;</button>
+    <div id="nxp-lb-counter">1 / 1</div>
+  </div>
+
+  <!-- Main modal -->
+  <div id="nxp-overlay" role="dialog" aria-modal="true" aria-label="İlan Önizleme">
+    <div id="nxp-modal">
+
+      <!-- ── LEFT: gallery ───────────────────────────────────── -->
+      <div id="nxp-gallery">
+        <div id="nxp-sl-wrap">
+          <div id="nxp-sl-track"></div>
+          <button class="nxp-sl-btn" id="nxp-sl-prev">&#8592;</button>
+          <button class="nxp-sl-btn" id="nxp-sl-next">&#8594;</button>
+          <div id="nxp-sl-count">1 / 1</div>
+          <button id="nxp-fullscreen-btn" title="Tam ekran">
+            <i class="fas fa-expand-alt"></i>
+          </button>
+        </div>
+        <!-- thumbnail strip -->
+        <div id="nxp-thumbs"></div>
+      </div>
+
+      <!-- ── RIGHT: info ─────────────────────────────────────── -->
+      <div id="nxp-info">
+        <!-- sticky close -->
+        <div id="nxp-close">
+          <button id="nxp-close-btn" aria-label="Kapat">✕</button>
+        </div>
+
+        <!-- loader -->
+        <div id="nxp-loader" style="display:none">
+          <div class="nxp-spinner"></div>
+          <span id="nxp-loader-msg">İlan bilgileri alınıyor…</span>
+        </div>
+
+        <!-- content -->
+        <div id="nxp-body" style="display:none">
+          <div id="nxp-m-tag"></div>
+          <h2 id="nxp-m-title"></h2>
+          <div id="nxp-m-loc">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span id="nxp-m-loc-text"></span>
+          </div>
+          <div id="nxp-m-stats"></div>
+          <div id="nxp-m-feats"></div>
+          <div id="nxp-m-desc"></div>
+          <div id="nxp-m-price-bar">
+            <span class="nxp-price-lbl">Fiyat</span>
+            <span id="nxp-m-price">—</span>
+          </div>
+          <div id="nxp-m-agent">
+            <div id="nxp-m-agent-avatar">EI</div>
+            <div>
+              <div class="nxp-aname">Erdoğan Işık</div>
+              <div class="nxp-aoff">Coldwell Banker Çizgi · Dikmen</div>
+              <div class="nxp-astars">★★★★★</div>
+            </div>
+          </div>
+          <div id="nxp-m-actions">
+            <a class="nxp-btn nxp-btn-wa" id="nxp-m-link" href="#" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <button class="nxp-btn nxp-btn-kredi" id="nxp-m-kredi" onclick="nexaShowKredi()">
+              <i class="fas fa-calculator"></i> Kredi
+            </button>
+            <button class="nxp-btn nxp-btn-out" id="nxp-m-close2">✕</button>
+          </div>
+
+          <!-- Kredi paneli -->
+          <div id="nxp-kredi-panel">
+            <div class="nxp-kredi-header">
+              <h3>Konut Kredisi Hesapla</h3>
+              <button class="nxp-kredi-close" onclick="document.getElementById('nxp-kredi-panel').style.display='none'">✕</button>
+            </div>
+            <div class="nxp-kredi-inputs">
+              <div>
+                <label>Kredi Tutarı (₺)</label>
+                <input id="nxp-kredi-amount" type="number" placeholder="Örn: 3.000.000">
+              </div>
+              <div>
+                <label>Vade (Ay)</label>
+                <select id="nxp-kredi-vade">
+                  <option value="60">60 Ay — 5 Yıl</option>
+                  <option value="84">84 Ay — 7 Yıl</option>
+                  <option value="120" selected>120 Ay — 10 Yıl</option>
+                  <option value="180">180 Ay — 15 Yıl</option>
+                  <option value="240">240 Ay — 20 Yıl</option>
+                </select>
+              </div>
+              <div>
+                <label>Aylık Faiz (%)</label>
+                <input id="nxp-kredi-faiz" type="number" step="0.01" value="3.09">
+              </div>
+            </div>
+            <button onclick="nexaKrediHesapla()" style="width:100%;background:#c9a84c;color:#0c0c11;border:none;border-radius:7px;padding:11px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;">
+              Hesapla
+            </button>
+            <div id="nxp-kredi-result">
+              <div class="nxp-k-row">
+                <div><div class="kl">Aylık Taksit</div><div class="kv" id="nxp-k-taksit"></div></div>
+                <div><div class="kl">Toplam Ödeme</div><div class="kv" id="nxp-k-toplam"></div></div>
+                <div><div class="kl">Toplam Faiz</div><div class="kv" id="nxp-k-faiz"></div></div>
+              </div>
+            </div>
+            <p class="nxp-kredi-note">* Tahminidir, bankadan onay alınız.</p>
+          </div>
+        </div><!-- /nxp-body -->
+      </div><!-- /nxp-info -->
+
+    </div><!-- /nxp-modal -->
+  </div><!-- /nxp-overlay -->
+
+  <script>
+  // ============================================================
+  // NEXA İLANLAR — Ultra Pro Listings Page
+  // ============================================================
+
+  // Page loader
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('pageLoader').classList.add('hidden'), 900);
+  });
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile nav
+  document.getElementById('navHamburger').addEventListener('click', () => {
+    document.getElementById('mobileNav').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  document.getElementById('mobileNavClose').addEventListener('click', () => {
+    document.getElementById('mobileNav').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  // ── STATE ──────────────────────────────────────────────────────
+  let allListings = [];
+  let filteredListings = [];
+  let favs = new Set(JSON.parse(localStorage.getItem('nxFavs') || '[]'));
+  let currentView = 'grid';
+  const ITEMS_PER_PAGE = 12;
+  let currentPage = 1;
+
+  // ── DEMO DATA ─────────────────────────────────────────────────
+  const DEMO = [
+    { id:'1', title:"Dikmen'de Lüks 4+1 Dublex", price:"8.500.000 TL", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80", type:"Satılık", rooms:"4+1", area:"220 m²", link:"" },
+    { id:'2', title:"Premium Site İçi 3+1 Daire", price:"35.000 TL/ay", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80", type:"Kiralık", rooms:"3+1", area:"165 m²", link:"" },
+    { id:'3', title:"Dikmen Merkezi Satılık 3+1", price:"5.200.000 TL", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80", type:"Satılık", rooms:"3+1", area:"145 m²", link:"" },
+    { id:'4', title:"Yeni Yapı 2+1 Lüks Daire", price:"22.000 TL/ay", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80", type:"Kiralık", rooms:"2+1", area:"115 m²", link:"" },
+    { id:'5', title:"Dikmen'de Satılık Villa", price:"18.500.000 TL", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80", type:"Satılık", rooms:"5+2", area:"380 m²", link:"" },
+    { id:'6', title:"Lüks Rezidans 3+1 Dairesi", price:"6.800.000 TL", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80", type:"Satılık", rooms:"3+1", area:"155 m²", link:"" },
+    { id:'7', title:"Bahçeli 4+1 Müstakil Ev", price:"12.200.000 TL", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80", type:"Satılık", rooms:"4+1", area:"280 m²", link:"" },
+    { id:'8', title:"Metro Yakını 1+1 Kiralık", price:"14.500 TL/ay", loc:"Kızılay, Çankaya", img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80", type:"Kiralık", rooms:"1+1", area:"65 m²", link:"" },
+    { id:'9', title:"Aziziye Satılık 2+1 Daire", price:"3.900.000 TL", loc:"Aziziye, Çankaya", img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80", type:"Satılık", rooms:"2+1", area:"98 m²", link:"" },
+    { id:'10', title:"Panoramik Manzaralı 5+1", price:"24.000.000 TL", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=800&q=80", type:"Satılık", rooms:"5+1", area:"420 m²", link:"" },
+    { id:'11', title:"Kiralık Stüdyo Daire 1+0", price:"10.000 TL/ay", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80", type:"Kiralık", rooms:"1+0", area:"45 m²", link:"" },
+    { id:'12', title:"Yüksek Katlı 3+1 Satılık", price:"7.400.000 TL", loc:"Dikmen, Çankaya", img:"https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80", type:"Satılık", rooms:"3+1", area:"138 m²", link:"" },
+  ];
+
+  // ── LOAD ──────────────────────────────────────────────────────
+  function showSkeletons() {
+    const grid = document.getElementById('listingsGrid');
+    grid.className = 'listings-grid';
+    grid.innerHTML = Array(6).fill(0).map((_,i) => `
+      <div class="lc-sk" style="animation-delay:${i*0.07}s">
+        <div class="lc-sk-img"></div>
+        <div class="lc-sk-body">
+          <div class="lc-sk-line" style="width:70%"></div>
+          <div class="lc-sk-line" style="width:45%"></div>
+          <div class="lc-sk-line" style="width:88%;height:10px"></div>
+        </div>
+      </div>`).join('');
+  }
+
+  async function fetchListings() {
+    const res = await fetch('/api/listings');
+    const data = await res.json();
+    if (data.success && data.data && data.data.length) return data.data;
+    return null;
+  }
+
+  async function loadListings() {
+    showSkeletons();
+
+    // 1. İlk deneme
+    let listings = null;
+    try { listings = await fetchListings(); } catch {}
+
+    // 2. Sunucu yeni başlamışsa cache henüz dolmamış olabilir.
+    //    3 saniye arayla 4 kez daha dene (toplam ~12 sn).
+    if (!listings) {
+      for (let attempt = 1; attempt <= 4; attempt++) {
+        await new Promise(r => setTimeout(r, 3000));
+        try { listings = await fetchListings(); } catch {}
+        if (listings) break;
+      }
+    }
+
+    // 3. Hâlâ boşsa demo veriye düş
+    allListings = listings || DEMO;
+    filteredListings = [...allListings];
+    updateStats();
+    render();
+  }
+
+  // ── STATS ──────────────────────────────────────────────────────
+  function updateStats() {
+    const satilik = allListings.filter(l => l.type === 'Satılık').length;
+    const kiralik = allListings.filter(l => l.type === 'Kiralık').length;
+    document.getElementById('statTotal').textContent = allListings.length;
+    document.getElementById('statSatilik').textContent = satilik;
+    document.getElementById('statKiralik').textContent = kiralik;
+  }
+
+  // ── RENDER ────────────────────────────────────────────────────
+  function render() {
+    const grid = document.getElementById('listingsGrid');
+    const countNum = document.getElementById('countNum');
+
+    // Sort
+    const sort = document.getElementById('sortSelect').value;
+    let sorted = [...filteredListings];
+    if (sort === 'price_asc') sorted.sort((a,b) => numVal(a.price) - numVal(b.price));
+    else if (sort === 'price_desc') sorted.sort((a,b) => numVal(b.price) - numVal(a.price));
+    else if (sort === 'area_desc') sorted.sort((a,b) => numVal(b.area) - numVal(a.area));
+
+    countNum.textContent = sorted.length;
+
+    // Paginate
+    const total = sorted.length;
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const page = sorted.slice(start, start + ITEMS_PER_PAGE);
+
+    grid.className = currentView === 'list' ? 'listings-list' : 'listings-grid';
+    grid.innerHTML = '';
+
+    if (page.length === 0) {
+      grid.innerHTML = `<div class="empty-state"><div class="empty-icon"><i class="fas fa-search"></i></div><h3>Sonuç Bulunamadı</h3><p>Farklı filtre kriterleri deneyiniz</p></div>`;
+      document.getElementById('pagination').innerHTML = '';
+      return;
+    }
+
+    page.forEach((listing, i) => {
+      const isFeatured = i === 0 && currentView === 'grid' && page.length >= 3;
+      const el = createCard(listing, isFeatured, start + i);
+      el.style.animationDelay = (i * 0.06) + 's';
+      grid.appendChild(el);
+    });
+
+    renderPagination(total);
+  }
+
+  // ── CREATE CARD ───────────────────────────────────────────────
+  function createCard(listing, isFeatured, globalIdx) {
+    const el = document.createElement('div');
+    el.className = 'lc' + (isFeatured ? ' lc-featured' : '');
+
+    const waMsg = encodeURIComponent(`Merhaba, "${listing.title}" ilanı hakkında bilgi almak istiyorum.`);
+    const badge = listing.type === 'Kiralık' ? 'lc-badge-kiralik' : 'lc-badge-satilik';
+    const isFav = favs.has(listing.id || listing.title);
+    const img = listing.img || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80';
+
+    el.innerHTML = `
+      <div class="lc-img">
+        <img src="${esc(img)}" alt="${esc(listing.title)}" loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80'">
+        <div class="lc-badge ${badge}">${esc(listing.type || 'Satılık')}</div>
+        <button class="lc-fav ${isFav?'active':''}" data-id="${esc(listing.id||listing.title)}"
+          onclick="toggleFav(this,event)" title="Favorilere ekle">
+          <i class="${isFav?'fas':'far'} fa-heart"></i>
+        </button>
+        <div class="lc-price-img">${esc(listing.price || 'Fiyat Sorunuz')}</div>
+      </div>
+      <div class="lc-body">
+        <h3 class="lc-title">${esc(listing.title)}</h3>
+        <div class="lc-loc"><i class="fas fa-map-marker-alt"></i>${esc(listing.loc || 'Dikmen, Çankaya')}</div>
+        <div class="lc-specs">
+          ${listing.rooms ? `<span class="lc-spec"><i class="fas fa-bed"></i>${esc(listing.rooms)}</span>` : ''}
+          ${listing.area  ? `<span class="lc-spec"><i class="fas fa-ruler-combined"></i>${esc(listing.area)}</span>` : ''}
+          ${listing.floor ? `<span class="lc-spec"><i class="fas fa-layer-group"></i>${esc(listing.floor)}</span>` : ''}
+        </div>
+        <div class="lc-actions">
+          <a class="lc-btn lc-btn-wa" href="https://wa.me/905324514008?text=${waMsg}" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+          <a class="lc-btn lc-btn-tel" href="tel:+905324514008">
+            <i class="fas fa-phone"></i> Ara
+          </a>
+        </div>
+        <button class="lc-incele" data-url="${esc(listing.link||'')}" onclick="openListing(this)">
+          <span>İlanı İncele</span> <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>`;
+    return el;
+  }
+
+  // ── PAGINATION ────────────────────────────────────────────────
+  function renderPagination(total) {
+    const pag = document.getElementById('pagination');
+    const pages = Math.ceil(total / ITEMS_PER_PAGE);
+    if (pages <= 1) { pag.innerHTML = ''; return; }
+
+    let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>&#8592;</button>`;
+    for (let i=1; i<=pages; i++) {
+      if (i===1 || i===pages || (i>=currentPage-1 && i<=currentPage+1)) {
+        html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`;
+      } else if (i===currentPage-2 || i===currentPage+2) {
+        html += `<span style="color:var(--gray-light);padding:0 4px;line-height:42px;">…</span>`;
+      }
+    }
+    html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===pages?'disabled':''}>&#8594;</button>`;
+    pag.innerHTML = html;
+  }
+
+  window.goPage = function(p) {
+    const pages = Math.ceil(filteredListings.length / ITEMS_PER_PAGE);
+    if (p < 1 || p > pages) return;
+    currentPage = p;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // ── FILTER ────────────────────────────────────────────────────
+  function applyFilters() {
+    const type  = document.querySelector('.type-pill.active')?.dataset.type || '';
+    const rooms = document.querySelector('.room-pill.active')?.dataset.rooms || '';
+    const minP  = parseFloat(document.getElementById('sbMinPrice').value) || 0;
+    const maxP  = parseFloat(document.getElementById('sbMaxPrice').value) || Infinity;
+    const minA  = parseFloat(document.getElementById('sbMinArea').value) || 0;
+    const maxA  = parseFloat(document.getElementById('sbMaxArea').value) || Infinity;
+
+    filteredListings = allListings.filter(l => {
+      if (type  && l.type !== type) return false;
+      if (rooms && !(l.rooms||'').includes(rooms)) return false;
+      const p = numVal(l.price);
+      if (p && (p < minP || p > maxP)) return false;
+      const a = numVal(l.area);
+      if (a && (a < minA || a > maxA)) return false;
+      return true;
+    });
+
+    currentPage = 1;
+    render();
+    renderChips();
+  }
+
+  function clearAll() {
+    document.querySelectorAll('.type-pill').forEach((p,i) => p.classList.toggle('active', i===0));
+    document.querySelectorAll('.room-pill').forEach((p,i) => p.classList.toggle('active', i===0));
+    ['sbMinPrice','sbMaxPrice','sbMinArea','sbMaxArea'].forEach(id => document.getElementById(id).value = '');
+    filteredListings = [...allListings];
+    currentPage = 1;
+    render();
+    renderChips();
+  }
+
+  function renderChips() {
+    const chips = document.getElementById('activeChips');
+    const section = document.getElementById('activeChipsSection');
+    chips.innerHTML = '';
+    const type  = document.querySelector('.type-pill.active')?.dataset.type || '';
+    const rooms = document.querySelector('.room-pill.active')?.dataset.rooms || '';
+    const minP  = document.getElementById('sbMinPrice').value;
+    const maxP  = document.getElementById('sbMaxPrice').value;
+    const minA  = document.getElementById('sbMinArea').value;
+    const maxA  = document.getElementById('sbMaxArea').value;
+
+    const add = (label, clearFn) => {
+      const c = document.createElement('div');
+      c.className = 'chip';
+      c.innerHTML = label + `<button onclick="${clearFn}">✕</button>`;
+      chips.appendChild(c);
+    };
+    if (type)  add(type,  "document.querySelector('.type-pill').click();");
+    if (rooms) add(rooms, "document.querySelector('.room-pill').click();");
+    if (minP)  add('Min '+parseInt(minP).toLocaleString('tr-TR')+'₺', "document.getElementById('sbMinPrice').value='';document.getElementById('applyBtn').click();");
+    if (maxP)  add('Max '+parseInt(maxP).toLocaleString('tr-TR')+'₺', "document.getElementById('sbMaxPrice').value='';document.getElementById('applyBtn').click();");
+    section.style.display = chips.children.length ? '' : 'none';
+  }
+
+  // ── FAVORITES ─────────────────────────────────────────────────
+  window.toggleFav = function(btn, e) {
+    e.stopPropagation();
+    const id = btn.dataset.id;
+    if (favs.has(id)) { favs.delete(id); btn.classList.remove('active'); btn.querySelector('i').className = 'far fa-heart'; }
+    else { favs.add(id); btn.classList.add('active'); btn.querySelector('i').className = 'fas fa-heart'; }
+    localStorage.setItem('nxFavs', JSON.stringify([...favs]));
+  };
+
+  // ── OPEN LISTING ──────────────────────────────────────────────
+  window.openListing = function(btn) {
+    const url = btn.getAttribute('data-url');
+    if (url && url.includes('cb.com.tr') && window.NexaPreview) {
+      window.NexaPreview.open(url);
+    } else if (url && url.startsWith('http')) {
+      window.open(url, '_blank');
+    } else {
+      // Show preview with listing data
+      const card = btn.closest('.lc');
+      const title = card.querySelector('.lc-title')?.textContent || '';
+      const price = card.querySelector('.lc-price-img')?.textContent || '';
+      const loc   = card.querySelector('.lc-loc')?.textContent?.trim() || '';
+      const img   = card.querySelector('.lc-img img')?.src || '';
+      const waMsg = encodeURIComponent(`Merhaba, "${title}" ilanı hakkında bilgi almak istiyorum.`);
+
+      // Demo inline preview (cb.com.tr linki yoksa)
+      const overlay = document.getElementById('nxp-overlay');
+
+      // Single image — use buildSlider via NexaPreview internal render path
+      const track = document.getElementById('nxp-sl-track');
+      track.innerHTML = img
+        ? `<div class="nxp-slide"><img src="${img}" alt="${title}" loading="eager"></div>`
+        : `<div class="nxp-slide"><div class="nxp-no-img"><i class="fas fa-image"></i><span>Görsel mevcut değil</span></div></div>`;
+
+      document.getElementById('nxp-thumbs').innerHTML = '';
+      document.getElementById('nxp-thumbs').style.display = 'none';
+      document.getElementById('nxp-sl-count').textContent = '1 / 1';
+      document.getElementById('nxp-fullscreen-btn').style.display = img ? '' : 'none';
+      document.querySelectorAll('.nxp-sl-btn').forEach(b => b.style.display = 'none');
+
+      document.getElementById('nxp-m-tag').textContent = 'İlan Detayı';
+      document.getElementById('nxp-m-title').textContent = title;
+      document.getElementById('nxp-m-loc-text').textContent = loc;
+      document.getElementById('nxp-m-price').textContent = price;
+      document.getElementById('nxp-m-stats').innerHTML = '';
+      document.getElementById('nxp-m-feats').innerHTML = '';
+      document.getElementById('nxp-m-desc').style.display = 'none';
+      document.getElementById('nxp-m-link').href = 'https://wa.me/905324514008?text=' + waMsg;
+
+      document.getElementById('nxp-loader').style.display = 'none';
+      document.getElementById('nxp-body').style.display = '';
+      document.getElementById('nxp-info').scrollTop = 0;
+      overlay.classList.add('nxp-open');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  // ── UTIL ──────────────────────────────────────────────────────
+  function numVal(str) { return parseFloat((str||'').replace(/[^0-9]/g,'')) || 0; }
+  function esc(s) { const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+
+  // ── EVENT LISTENERS ───────────────────────────────────────────
+  document.querySelectorAll('.type-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.type-pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      applyFilters();
+    });
+  });
+
+  document.querySelectorAll('.room-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.room-pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      applyFilters();
+    });
+  });
+
+  document.getElementById('applyBtn').addEventListener('click', applyFilters);
+  document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+  document.getElementById('sortSelect').addEventListener('change', () => { currentPage=1; render(); });
+
+  document.getElementById('gridViewBtn').addEventListener('click', function() {
+    currentView = 'grid';
+    this.classList.add('active');
+    document.getElementById('listViewBtn').classList.remove('active');
+    render();
+  });
+  document.getElementById('listViewBtn').addEventListener('click', function() {
+    currentView = 'list';
+    this.classList.add('active');
+    document.getElementById('gridViewBtn').classList.remove('active');
+    render();
+  });
+
+  // Enter on inputs
+  ['sbMinPrice','sbMaxPrice','sbMinArea','sbMaxArea'].forEach(id => {
+    document.getElementById(id).addEventListener('keydown', e => { if(e.key==='Enter') applyFilters(); });
+  });
+
+  // ── NEXA PREVIEW MODAL ────────────────────────────────────────
+  (function () {
+    var images = [], curIdx = 0;
+    var swipeX0 = null, swipeActive = false;
+    function $(id){ return document.getElementById(id); }
+
+    /* ── Build slider & thumbs ── */
+    function buildSlider(imgs){
+      images = imgs.length ? imgs : [];
+      curIdx = 0;
+      var track = $('nxp-sl-track');
+
+      if(!images.length){
+        track.innerHTML = '<div class="nxp-slide"><div class="nxp-no-img"><i class="fas fa-image"></i><span>Görsel mevcut değil</span></div></div>';
+        $('nxp-thumbs').innerHTML = '';
+        $('nxp-thumbs').style.display = 'none';
+        $('nxp-sl-count').textContent = '';
+        document.querySelectorAll('.nxp-sl-btn').forEach(function(b){b.style.display='none';});
+        $('nxp-fullscreen-btn').style.display = 'none';
+        return;
+      }
+
+      track.innerHTML = images.map(function(src,i){
+        return '<div class="nxp-slide">'
+          + '<img src="'+src+'" alt="Fotoğraf '+(i+1)+'" loading="'+(i===0?'eager':'lazy')+'" draggable="false">'
+          + '</div>';
+      }).join('');
+
+      $('nxp-thumbs').innerHTML = images.map(function(src,i){
+        return '<div class="nxp-thumb'+(i===0?' active':'')+'" data-i="'+i+'">'
+          + '<img src="'+src+'" alt="" loading="lazy">'
+          + '<span class="nxp-thumb-num">'+(i+1)+'</span>'
+          + '</div>';
+      }).join('');
+
+      // thumb click
+      $('nxp-thumbs').querySelectorAll('.nxp-thumb').forEach(function(t){
+        t.addEventListener('click', function(){ goSlide(parseInt(this.dataset.i)); });
+      });
+
+      $('nxp-fullscreen-btn').style.display = '';
+      updateSlider();
+    }
+
+    function updateSlider(){
+      var n = images.length;
+      if(!n) return;
+      $('nxp-sl-track').style.transform = 'translateX(-'+curIdx*100+'%)';
+      $('nxp-sl-count').textContent = (curIdx+1)+' / '+n;
+
+      var ths = $('nxp-thumbs').querySelectorAll('.nxp-thumb');
+      ths.forEach(function(t,i){
+        t.classList.toggle('active', i===curIdx);
+        if(i===curIdx) t.scrollIntoView({behavior:'smooth',inline:'nearest',block:'nearest'});
+      });
+
+      var showBtns = n > 1;
+      document.querySelectorAll('.nxp-sl-btn').forEach(function(b){b.style.display=showBtns?'flex':'none';});
+      $('nxp-thumbs').style.display = n > 1 ? 'flex' : 'none';
+    }
+
+    function goSlide(idx){
+      curIdx = ((idx % images.length) + images.length) % images.length;
+      updateSlider();
+    }
+
+    /* ── Swipe & drag ── */
+    var slWrap = $('nxp-sl-wrap');
+    slWrap.addEventListener('mousedown', function(e){ swipeX0=e.clientX; swipeActive=true; });
+    slWrap.addEventListener('mousemove', function(e){ if(!swipeActive) return; });
+    slWrap.addEventListener('mouseup',   function(e){
+      if(!swipeActive) return;
+      var dx = e.clientX - swipeX0;
+      if(Math.abs(dx)>40) goSlide(dx<0 ? curIdx+1 : curIdx-1);
+      swipeActive = false;
+    });
+    slWrap.addEventListener('mouseleave', function(){ swipeActive=false; });
+    slWrap.addEventListener('touchstart', function(e){ swipeX0=e.touches[0].clientX; swipeActive=true; }, {passive:true});
+    slWrap.addEventListener('touchend',   function(e){
+      if(!swipeActive) return;
+      var dx = e.changedTouches[0].clientX - swipeX0;
+      if(Math.abs(dx)>40) goSlide(dx<0 ? curIdx+1 : curIdx-1);
+      swipeActive = false;
+    });
+
+    $('nxp-sl-prev').addEventListener('click', function(e){ e.stopPropagation(); goSlide(curIdx-1); });
+    $('nxp-sl-next').addEventListener('click', function(e){ e.stopPropagation(); goSlide(curIdx+1); });
+
+    /* ── Fullscreen lightbox ── */
+    var lbOpen = false;
+    function openLightbox(idx){
+      if(!images.length) return;
+      curIdx = idx;
+      lbOpen = true;
+      var lb = $('nxp-lightbox');
+      lb.classList.add('open');
+      updateLightbox();
+    }
+    function updateLightbox(){
+      $('nxp-lb-img').src = images[curIdx];
+      $('nxp-lb-counter').textContent = (curIdx+1)+' / '+images.length;
+    }
+    function closeLightbox(){
+      lbOpen = false;
+      $('nxp-lightbox').classList.remove('open');
+    }
+    slWrap.addEventListener('click', function(e){
+      if(Math.abs(e.clientX - swipeX0) < 8) openLightbox(curIdx);
+    });
+    $('nxp-fullscreen-btn').addEventListener('click', function(e){
+      e.stopPropagation(); openLightbox(curIdx);
+    });
+    $('nxp-lb-close').addEventListener('click', closeLightbox);
+    $('nxp-lb-prev').addEventListener('click', function(){
+      curIdx = ((curIdx-1)+images.length)%images.length;
+      updateLightbox(); updateSlider();
+    });
+    $('nxp-lb-next').addEventListener('click', function(){
+      curIdx = (curIdx+1)%images.length;
+      updateLightbox(); updateSlider();
+    });
+    $('nxp-lightbox').addEventListener('click', function(e){
+      if(e.target === $('nxp-lightbox') || e.target === $('nxp-lb-img')) closeLightbox();
+    });
+
+    /* ── Keyboard ── */
+    document.addEventListener('keydown', function(e){
+      if(lbOpen){
+        if(e.key==='ArrowLeft')  { curIdx=((curIdx-1)+images.length)%images.length; updateLightbox(); updateSlider(); }
+        if(e.key==='ArrowRight') { curIdx=(curIdx+1)%images.length; updateLightbox(); updateSlider(); }
+        if(e.key==='Escape')     closeLightbox();
+        return;
+      }
+      if(!$('nxp-overlay').classList.contains('nxp-open')) return;
+      if(e.key==='ArrowLeft')  goSlide(curIdx-1);
+      if(e.key==='ArrowRight') goSlide(curIdx+1);
+      if(e.key==='Escape')     closeModal();
+    });
+
+    /* ── Render data ── */
+    function render(d){
+      buildSlider(d.images || []);
+
+      var waTitle = d.title || 'ilan';
+      var waText  = encodeURIComponent('Merhaba, "'+waTitle+'" ilanı hakkında bilgi almak istiyorum.');
+      $('nxp-m-link').href = 'https://wa.me/905324514008?text='+waText;
+
+      $('nxp-m-tag').textContent = (d.type||'İlan')+' · '+(d.status||'Satılık');
+      $('nxp-m-title').textContent = d.title||'—';
+      $('nxp-m-loc-text').textContent = d.location||'—';
+      $('nxp-m-price').textContent = d.price||'Fiyat sorunuz';
+
+      var statsData = [];
+      if(d.rooms)  statsData.push({l:'Oda Sayısı',  v:d.rooms});
+      if(d.sqm)    statsData.push({l:'Brüt Alan',   v:d.sqm});
+      if(d.status) statsData.push({l:'Durum',       v:d.status});
+      if(d.type)   statsData.push({l:'Tür',         v:d.type});
+      $('nxp-m-stats').innerHTML = statsData.map(function(s){
+        return '<div class="nxp-stat"><span class="nxp-stat-l">'+s.l+'</span><span class="nxp-stat-v">'+s.v+'</span></div>';
+      }).join('');
+
+      // Features
+      var featsEl = $('nxp-m-feats');
+      if(d.features && d.features.length){
+        featsEl.innerHTML = '<div class="nxp-feats-title">Özellikler</div>'
+          + '<div class="nxp-feat-grid">'
+          + d.features.map(function(f){
+              return '<div class="nxp-feat-row"><span class="fl">'+f.label+'</span><span class="fv">'+f.value+'</span></div>';
+            }).join('')
+          + '</div>';
+      } else {
+        featsEl.innerHTML = '';
+      }
+
+      var descEl = $('nxp-m-desc');
+      if(d.description){ descEl.textContent=d.description; descEl.style.display=''; }
+      else descEl.style.display='none';
+
+      $('nxp-loader').style.display = 'none';
+      $('nxp-body').style.display   = '';
+      $('nxp-info').scrollTop = 0;
+    }
+
+    /* ── Open modal ── */
+    function openModal(cbUrl){
+      if(!cbUrl) return;
+      images=[]; curIdx=0;
+      $('nxp-sl-track').innerHTML='';
+      $('nxp-thumbs').innerHTML='';
+      $('nxp-thumbs').style.display='none';
+      $('nxp-sl-count').textContent='';
+      $('nxp-body').style.display='none';
+      $('nxp-loader').style.display='flex';
+      $('nxp-loader-msg').textContent='İlan bilgileri alınıyor…';
+      $('nxp-m-link').href='https://wa.me/905324514008';
+      $('nxp-overlay').classList.add('nxp-open');
+      document.body.style.overflow='hidden';
+      $('nxp-info').scrollTop=0;
+
+      fetch('/api/listing/preview?url='+encodeURIComponent(cbUrl))
+        .then(function(r){ return r.json(); })
+        .then(function(d){ if(!d.ok) throw new Error(d.error||'Hata'); render(d); })
+        .catch(function(err){ $('nxp-loader-msg').textContent='⚠ '+(err.message||'Sayfa alınamadı'); });
+    }
+
+    /* ── Close modal ── */
+    function closeModal(){
+      $('nxp-overlay').classList.remove('nxp-open');
+      document.body.style.overflow='';
+      var kp=document.getElementById('nxp-kredi-panel');
+      if(kp) kp.style.display='none';
+    }
+
+    $('nxp-close-btn').addEventListener('click', closeModal);
+    $('nxp-m-close2').addEventListener('click',  closeModal);
+    $('nxp-overlay').addEventListener('click', function(e){
+      if(e.target===$('nxp-overlay')) closeModal();
+    });
+
+    window.NexaPreview = { open: openModal, close: closeModal };
+  })();
+
+  // ── KREDI ─────────────────────────────────────────────────────
+  window.nexaShowKredi = function() {
+    var p = document.getElementById('nxp-kredi-panel');
+    if(p.style.display==='none'){ p.style.display='block'; }
+    else { p.style.display='none'; }
+  };
+  window.nexaKrediHesapla = function() {
+    var P = parseFloat(document.getElementById('nxp-kredi-amount').value)||0;
+    var n = parseFloat(document.getElementById('nxp-kredi-vade').value)||120;
+    var r = parseFloat(document.getElementById('nxp-kredi-faiz').value)/100;
+    if(!P||!r) return;
+    var taksit = P*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+    var fmt = function(v){ return Math.round(v).toLocaleString('tr-TR')+' ₺'; };
+    document.getElementById('nxp-k-taksit').textContent = fmt(taksit);
+    document.getElementById('nxp-k-toplam').textContent = fmt(taksit*n);
+    document.getElementById('nxp-k-faiz').textContent   = fmt(taksit*n - P);
+    document.getElementById('nxp-kredi-result').style.display = 'block';
+  };
+
+  // ── INIT ──────────────────────────────────────────────────────
+
+  // Şehir ışığı partikülleri
+  (function(){
+    var container = document.getElementById('heroParticles');
+    if(!container) return;
+    var colors = [
+      'rgba(212,175,55,0.65)',  // gold
+      'rgba(212,175,55,0.40)',
+      'rgba(160,200,255,0.35)', // mavi-beyaz
+      'rgba(255,255,255,0.25)',
+      'rgba(255,200,100,0.45)',
+    ];
+    var count = 38;
+    for(var i=0; i<count; i++){
+      var el = document.createElement('div');
+      el.className = 'hp';
+      var size = (Math.random()*3+1.2).toFixed(1);
+      var left = (Math.random()*100).toFixed(1);
+      var bottom = (Math.random()*60).toFixed(1); // alt yarıda yoğun
+      var dur  = (Math.random()*8+6).toFixed(1);
+      var del  = (Math.random()*12).toFixed(1);
+      var color = colors[Math.floor(Math.random()*colors.length)];
+      el.style.cssText =
+        'width:'+size+'px;height:'+size+'px;' +
+        'left:'+left+'%;bottom:'+bottom+'%;' +
+        'background:'+color+';' +
+        'box-shadow:0 0 '+(parseFloat(size)*3)+'px '+color+';' +
+        'animation-duration:'+dur+'s;' +
+        'animation-delay:-'+del+'s;';
+      container.appendChild(el);
+    }
+
+    // Parallax efekti — mouse hareketi ile hafif kayma
+    var banner = document.getElementById('heroBanner');
+    var bgPhoto = document.getElementById('heroBgPhoto');
+    if(banner && bgPhoto){
+      banner.addEventListener('mousemove', function(e){
+        var rect = banner.getBoundingClientRect();
+        var cx = (e.clientX - rect.left) / rect.width  - 0.5; // -0.5 .. 0.5
+        var cy = (e.clientY - rect.top)  / rect.height - 0.5;
+        bgPhoto.style.transform = 'scale(1.03) translate('+(cx*-18)+'px,'+(cy*-10)+'px)';
+      });
+      banner.addEventListener('mouseleave', function(){
+        bgPhoto.style.transform = 'scale(1.0)';
+      });
+    }
+  })();
+
+  loadListings();
+  </script>
+</body>
+</html>
